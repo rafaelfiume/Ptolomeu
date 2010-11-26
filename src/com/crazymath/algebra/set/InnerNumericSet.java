@@ -8,15 +8,15 @@ import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-class InnerNumericSet<T extends Number> implements NumericSet<T> {
+final class InnerNumericSet<T extends Number> implements AlgebraSet<T> {
 
     private final NavigableSet<T> elements = new TreeSet<T>();
 
     private InnerNumericSet() {
     }
 
-    static <T extends Number> InnerNumericSet<T> newInnerNumericSet() {
-        return new InnerNumericSet<T>();
+    static <S extends Number> InnerNumericSet<S> newInnerNumericSet() {
+        return new InnerNumericSet<S>();
     }
 
     @Override
@@ -40,7 +40,7 @@ class InnerNumericSet<T extends Number> implements NumericSet<T> {
     }
 
     @Override
-    public boolean contains(NumericSet<T> other) {
+    public boolean contains(AlgebraSet<T> other) {
         Validate.notNull(other);
 
         if (other.isEmpty()) {
@@ -62,7 +62,7 @@ class InnerNumericSet<T extends Number> implements NumericSet<T> {
     public Iterator<T> iterator() {
         return elements.iterator();
     }
-    
+
     @Override
     public T lower() {
         return elements.first();
