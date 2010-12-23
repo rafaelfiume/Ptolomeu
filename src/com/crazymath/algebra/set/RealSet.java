@@ -1,51 +1,63 @@
 package com.crazymath.algebra.set;
 
-import static com.crazymath.algebra.set.InnerNumericSet.newInnerNumericSet;
+import org.apache.commons.lang.Validate;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-
+// TODO @Immutable
 public final class RealSet extends NumericSet<Double> {
 
-    RealSet(AlgebraSet<Double> elements) {
+    RealSet(ElementsSet<Double> elementsSet) {
+        super(elementsSet);
+    }
+
+    RealSet(IndividualElements<Double> elements, Intervals<Double> intervals) {
+        addElements(elements);
+        addIntervals(intervals);
+    }
+
+    private RealSet(Double... elements) {
         addElements(elements);
     }
 
-    private RealSet(Builder builder) {
-        setElements(builder.elements);
+    private RealSet(Interval<Double> interval) {
+        Validate.notNull(interval, "interval cannot be null");
+        addInterval(interval);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == null) {
-            return false;
-        }
-        if (other == this) {
-            return true;
-        }
-        if (other.getClass() != this.getClass()) {
-            return false;
-        }
-        return new EqualsBuilder().append(getElements(), ((RealSet) other).getElements())
-                .isEquals();
+    public static RealSet newInstance(Double... elements) {
+        return new RealSet(elements);
     }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append(getElements()).toHashCode();
+    public static RealSet newInstance(Double lowerEndpoint, Endpoint leftBound,
+            Double upperEndpoint, Endpoint rightBound) {
+
+        return new RealSet(Interval.newInstance(lowerEndpoint, upperEndpoint));
     }
 
+    // TODO Forbid empty constructor
     public static class Builder {
 
-        private final AlgebraSet<Double> elements = newInnerNumericSet();
+        private final NumericSet.Builder builder = new NumericSet.Builder();
 
-        public Builder add(double element) {
-            elements.add(element);
+        public Builder() {
+            // FIXME
+            // new RealSet.Builder().build();
+            // ... will throw a ClassCastException
+        }
+
+        public Builder add(Double element) {
+            builder.add(element);
+            return this;
+        }
+
+        public Builder addInterval(Double lowerEndpoint, Endpoint leftBound, Double upperEndpoint,
+                Endpoint rightBound) {
+
+            builder.addInterval(lowerEndpoint, leftBound, upperEndpoint, rightBound);
             return this;
         }
 
         public RealSet build() {
-            return new RealSet(this);
+            return (RealSet) builder.build();
         }
 
     }

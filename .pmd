@@ -212,10 +212,6 @@
             <ruleset>Controversial Rules</ruleset>
         </rule>
         <rule>
-            <name>AvoidFinalLocalVariable</name>
-            <ruleset>Controversial Rules</ruleset>
-        </rule>
-        <rule>
             <name>AvoidUsingNativeCode</name>
             <ruleset>Controversial Rules</ruleset>
         </rule>
@@ -592,15 +588,7 @@
             <ruleset>JUnit Rules</ruleset>
         </rule>
         <rule>
-            <name>UseAssertEqualsInsteadOfAssertTrue</name>
-            <ruleset>JUnit Rules</ruleset>
-        </rule>
-        <rule>
             <name>UseAssertNullInsteadOfAssertTrue</name>
-            <ruleset>JUnit Rules</ruleset>
-        </rule>
-        <rule>
-            <name>UseAssertSameInsteadOfAssertTrue</name>
             <ruleset>JUnit Rules</ruleset>
         </rule>
         <rule>

@@ -1,49 +1,36 @@
 package com.crazymath.algebra.set;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.Validate;
 
-/**
- * TODO Idea 1: to separate algebra operations (e.g. union) from the Set itself, and thus permit the
- * same operations in different implementations of Set's (immutable, mutable thread-safe, etc.)
- * 
- * <p>
- * Não é thread-safe.
- * 
- * @author Rafael Fiume
- */
+// TODO @Immutable
 public final class IntegerSet extends NumericSet<Integer> {
 
-    IntegerSet(AlgebraSet<Integer> elements) {
-        addElements(elements);
+    IntegerSet(ElementsSet<Integer> elementsSet) {
+        super(elementsSet);
     }
-    
+
+    IntegerSet(IndividualElements<Integer> elements, Intervals<Integer> intervals) {
+        addElements(elements);
+        addIntervals(intervals);
+    }
+
     private IntegerSet(Integer... elements) {
         addElements(elements);
     }
-    
+
+    private IntegerSet(Interval<Integer> interval) {
+        Validate.notNull(interval, "interval cannot be null");
+        addInterval(interval);
+    }
+
     public static IntegerSet newInstance(Integer... elements) {
         return new IntegerSet(elements);
     }
-    
-    @Override
-    public boolean equals(Object other) {
-        if (other == null) {
-            return false;
-        }
-        if (other == this) {
-            return true;
-        }
-        if (other.getClass() != this.getClass()) {
-            return false;
-        }
-        return new EqualsBuilder().append(getElements(), ((IntegerSet) other).getElements())
-                .isEquals();
-    }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append(getElements()).toHashCode();
+    public static IntegerSet newInstance(Integer lowerEndpoint, Endpoint leftBound,
+            Integer upperEndpoint, Endpoint rightBound) {
+
+        return new IntegerSet(Interval.newInstance(lowerEndpoint, upperEndpoint));
     }
 
 }

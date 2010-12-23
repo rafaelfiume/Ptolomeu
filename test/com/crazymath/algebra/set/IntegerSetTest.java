@@ -16,8 +16,7 @@ public class IntegerSetTest {
     public void testIsEmpty() {
         final IntegerSet empty = IntegerSet.newInstance();
         assertTrue(empty.isEmpty());
-        empty.add(143, 2);
-        assertFalse(empty.isEmpty());
+        assertFalse(a.isEmpty());
     }
 
     @Test
@@ -27,13 +26,16 @@ public class IntegerSetTest {
     }
 
     @Test
-    public void testContainsSet() {
+    public void testContains() {
         assertTrue(a.contains(b));
         assertFalse(b.contains(a));
         assertFalse(a.contains(IntegerSet.newInstance(1, 2, 1981)));
     }
 
-    // TODO testIterator
+    @Test
+    public void testUpper() {
+        assertEquals(Integer.valueOf(15), a.upper());
+    }
 
     @Test
     public void testLower() {

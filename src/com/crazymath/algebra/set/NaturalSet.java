@@ -1,69 +1,91 @@
 package com.crazymath.algebra.set;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.Validate;
 
-/**
- * This class is not thread-safe.
- * 
- * @author Rafael Fiume
- */
+import com.crazymath.algebra.AlgebraException;
+
+// TODO @Immutable
 public final class NaturalSet extends NumericSet<Integer> {
 
-    NaturalSet(AlgebraSet<Integer> elements) {
-        // FIXME Bug aqui permite que sejam inseridos elementos negativos em NaturalSet
+    NaturalSet(ElementsSet<Integer> elementsSet) {
+        super(elementsSet);
+    }
+
+    NaturalSet(IndividualElements<Integer> elements, Intervals<Integer> intervals) {
+        NaturalSet.validateNotNegative(elements);
         addElements(elements);
+        NaturalSet.validateNotNegative(intervals);
+        addIntervals(intervals);
     }
 
     private NaturalSet(Integer... elements) {
-        checkNotNegative(elements);
+        NaturalSet.validateNotNegative(elements);
         addElements(elements);
+    }
+
+    private NaturalSet(Interval<Integer> interval) {
+        Validate.notNull(interval, "interval cannot be null");
+        NaturalSet.validateNotNegative(interval.lowerEndpoint());
+        addInterval(interval);
     }
 
     public static NaturalSet newInstance(Integer... elements) {
         return new NaturalSet(elements);
     }
 
-    @Override
-    public void add(Integer element) {
-        checkNotNegative(element);
-        super.add(element);
+    public static NaturalSet newInstance(Integer lowerEndpoint, Endpoint leftBound,
+            Integer upperEndpoint, Endpoint rightBound) {
+
+        return new NaturalSet(Interval.newInstance(lowerEndpoint, upperEndpoint));
     }
 
-    @Override
-    public void add(Integer... elements) {
-        checkNotNegative(elements);
-        addElements(elements);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == null) {
-            return false;
-        }
-        if (other == this) {
-            return true;
-        }
-        if (other.getClass() != this.getClass()) {
-            return false;
-        }
-        return new EqualsBuilder().append(getElements(), ((NaturalSet) other).getElements())
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append(getElements()).toHashCode();
-    }
-
-    private void checkNotNegative(Integer... elements) {
+    static void validateNotNegative(Integer... elements) {
         for (Integer each : elements) {
             if (each < 0) {
-                // TODO Replace this by a more appropriate exception
-                // since this's not really an arithmetic error, but an algebra one.
-                throw new ArithmeticException();
+                throw new AlgebraException("A natural set cannot have a negative number");
             }
         }
+    }
+
+    static void validateNotNegative(IndividualElements<Integer> elements) {
+        for (final Integer anElement : elements) {
+            if (anElement < 0) {
+                throw new AlgebraException("A natural set cannot have a negative number");
+            }
+        }
+    }
+
+    static void validateNotNegative(Intervals<Integer> intervals) {
+        if (intervals.isNotEmpty() && intervals.firstLowerEndpoint() < 0) {
+            throw new AlgebraException("A natural set cannot have a negative number");
+        }
+    }
+
+    // TODO Forbid empty constructor
+    public static class Builder {
+
+        private final NumericSet.Builder builder = new NumericSet.Builder();
+
+        public Builder add(Integer element) {
+            NaturalSet.validateNotNegative(element);
+
+            builder.add(element);
+            return this;
+        }
+
+        public Builder addInterval(Integer lowerEndpoint, Endpoint leftBound,
+                Integer upperEndpoint, Endpoint rightBound) {
+
+            NaturalSet.validateNotNegative(lowerEndpoint);
+
+            builder.addInterval(lowerEndpoint, leftBound, upperEndpoint, rightBound);
+            return this;
+        }
+
+        public NaturalSet build() {
+            return (NaturalSet) builder.build();
+        }
+
     }
 
 }
