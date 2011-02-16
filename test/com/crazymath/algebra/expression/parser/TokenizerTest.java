@@ -26,6 +26,7 @@ public class TokenizerTest {
         assertEquals(Symbols.TS_2, it.next());
         assertEquals(Symbols.TS_PLUS, it.next());
         assertEquals(Symbols.TS_3, it.next());
+        assertEquals(Symbols.TS_EOF, it.next());
     }
 
     @Test
@@ -37,18 +38,21 @@ public class TokenizerTest {
         tokens.moveCursor();
         tokens.moveCursor();
         assertEquals(Symbols.TS_3, tokens.get());
-
+        tokens.moveCursor();
+        assertEquals(Symbols.TS_EOF, tokens.get());
     }
 
     @Test
-    public void canMoveCursor() {
-        assertTrue(tokens.canMoveCursor());
-        tokens.moveCursor();
-        tokens.moveCursor();
-        tokens.moveCursor();
-        tokens.moveCursor();
-        tokens.moveCursor();
-        assertFalse(tokens.canMoveCursor());
+    public void testHasNext() {
+        assertTrue(tokens.hasNext());
+        tokens.moveCursor(); // +
+        tokens.moveCursor(); // 2
+        tokens.moveCursor(); // +
+        tokens.moveCursor(); // 3
+        tokens.moveCursor(); // $
+        assertTrue(tokens.hasNext()); // has $
+        tokens.moveCursor(); // nothing here
+        assertFalse(tokens.hasNext());
     }
 
 }

@@ -26,6 +26,7 @@ final class Tokens implements Iterable<Symbols> {
         for (char aChar : splited) {
             tokens.add(Symbols.of(aChar));
         }
+        tokens.add(Symbols.TS_EOF);
 
         return tokens;
     }
@@ -35,7 +36,7 @@ final class Tokens implements Iterable<Symbols> {
         return tokens.iterator(); // TODO Encapsulate iterator
     }
 
-    public boolean canMoveCursor() {
+    public boolean hasNext() {
         return cursor < tokens.size();
     }
 
