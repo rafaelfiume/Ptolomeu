@@ -10,7 +10,9 @@ import org.apache.commons.lang.Validate;
 
 final class Tokens implements Iterable<Symbols> {
 
-    final List<Symbols> tokens = new ArrayList<Symbols>();
+    private final List<Symbols> tokens = new ArrayList<Symbols>();
+
+    private int cursor = 0;
 
     private Tokens() {
         // Instantiated via method factory
@@ -31,6 +33,18 @@ final class Tokens implements Iterable<Symbols> {
     @Override
     public Iterator<Symbols> iterator() {
         return tokens.iterator(); // TODO Encapsulate iterator
+    }
+
+    public boolean canMoveCursor() {
+        return cursor < tokens.size();
+    }
+
+    void moveCursor() {
+        cursor++;
+    }
+
+    public Symbols get() {
+        return tokens.get(cursor);
     }
 
     private void add(Symbols symbol) {
