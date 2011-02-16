@@ -1,7 +1,6 @@
 package com.crazymath.algebra.expression.parser;
 
-// TODO Separate enums for terminal from nonterminal symbols
-enum Symbols {
+enum Symbol {
 
     TS_PLUS("+"), // TODO Use char instead of Strings for terminals symbols
     TS_0("0"),
@@ -18,28 +17,28 @@ enum Symbols {
     TS_INVALID("\1"),
 
     NTS_ADD("ADD"),
-    NTS_ADD_("ADD'"),
+    NTS_ADD_2("ADD'"),
     NTS_INT("INT");
 
     private final String token;
 
-    Symbols(String token) {
+    Symbol(String token) {
         this.token = token;
     }
 
     /*
      * "Converts a valid token to the corresponding terminal symbol" (Taken from Wikipedia)
      */
-    final static Symbols of(char token) {
+    final static Symbol of(char token) {
 
-        for (final Symbols s : values()) {
+        for (final Symbol s : values()) {
             if (s.token.equals(Character.toString(token))) {
                 return s;
             }
         }
 
         // PENDING See how to deal with error handling
-        throw new IllegalArgumentException("Cannot parse token " + token);
+        throw new IllegalStateException("Cannot parse token '" + token + "'");
     }
 
     String getToken() {

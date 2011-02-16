@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.apache.commons.lang.Validate;
 
-final class Tokens implements Iterable<Symbols> {
+final class Tokens implements Iterable<Symbol> {
 
-    private final List<Symbols> tokens = new ArrayList<Symbols>();
+    private final List<Symbol> tokens = new ArrayList<Symbol>();
 
     private int cursor = 0;
 
@@ -24,15 +24,15 @@ final class Tokens implements Iterable<Symbols> {
         final Tokens tokens = new Tokens();
         final char[] splited = input.toCharArray();
         for (char aChar : splited) {
-            tokens.add(Symbols.of(aChar));
+            tokens.add(Symbol.of(aChar));
         }
-        tokens.add(Symbols.TS_EOF);
+        tokens.add(Symbol.TS_EOF);
 
         return tokens;
     }
 
     @Override
-    public Iterator<Symbols> iterator() {
+    public Iterator<Symbol> iterator() {
         return tokens.iterator(); // TODO Encapsulate iterator
     }
 
@@ -44,11 +44,11 @@ final class Tokens implements Iterable<Symbols> {
         cursor++;
     }
 
-    public Symbols get() {
+    public Symbol get() {
         return tokens.get(cursor);
     }
 
-    private void add(Symbols symbol) {
+    private void add(Symbol symbol) {
         tokens.add(symbol);
     }
 

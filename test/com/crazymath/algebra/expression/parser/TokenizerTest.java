@@ -20,26 +20,26 @@ public class TokenizerTest {
 
     @Test
     public void testTokenizer() {
-        final Iterator<Symbols> it = tokens.iterator();
-        assertEquals(Symbols.TS_9, it.next());
-        assertEquals(Symbols.TS_PLUS, it.next());
-        assertEquals(Symbols.TS_2, it.next());
-        assertEquals(Symbols.TS_PLUS, it.next());
-        assertEquals(Symbols.TS_3, it.next());
-        assertEquals(Symbols.TS_EOF, it.next());
+        final Iterator<Symbol> it = tokens.iterator();
+        assertEquals(Symbol.TS_9, it.next());
+        assertEquals(Symbol.TS_PLUS, it.next());
+        assertEquals(Symbol.TS_2, it.next());
+        assertEquals(Symbol.TS_PLUS, it.next());
+        assertEquals(Symbol.TS_3, it.next());
+        assertEquals(Symbol.TS_EOF, it.next());
     }
 
     @Test
     public void testMoveCursor() {
-        assertEquals(Symbols.TS_9, tokens.get());
+        assertEquals(Symbol.TS_9, tokens.get());
         tokens.moveCursor();
-        assertEquals(Symbols.TS_PLUS, tokens.get());
+        assertEquals(Symbol.TS_PLUS, tokens.get());
         tokens.moveCursor();
         tokens.moveCursor();
         tokens.moveCursor();
-        assertEquals(Symbols.TS_3, tokens.get());
+        assertEquals(Symbol.TS_3, tokens.get());
         tokens.moveCursor();
-        assertEquals(Symbols.TS_EOF, tokens.get());
+        assertEquals(Symbol.TS_EOF, tokens.get());
     }
 
     @Test
