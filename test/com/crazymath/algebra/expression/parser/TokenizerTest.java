@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Iterator;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,38 +18,42 @@ public class TokenizerTest {
 
     @Test
     public void testTokenizer() {
-        final Iterator<Symbol> it = tokens.iterator();
-        assertEquals(Symbol.TS_9, it.next());
-        assertEquals(Symbol.TS_PLUS, it.next());
-        assertEquals(Symbol.TS_2, it.next());
-        assertEquals(Symbol.TS_PLUS, it.next());
-        assertEquals(Symbol.TS_3, it.next());
-        assertEquals(Symbol.TS_EOF, it.next());
+        assertEquals(Symbol.TS_9, tokens.current());
+        tokens.moveToNext();
+        assertEquals(Symbol.TS_PLUS, tokens.current());
+        tokens.moveToNext();
+        assertEquals(Symbol.TS_2, tokens.current());
+        tokens.moveToNext();
+        assertEquals(Symbol.TS_PLUS, tokens.current());
+        tokens.moveToNext();
+        assertEquals(Symbol.TS_3, tokens.current());
+        tokens.moveToNext();
+        assertEquals(Symbol.TS_EOF, tokens.current());
     }
 
     @Test
-    public void testMoveCursor() {
-        assertEquals(Symbol.TS_9, tokens.get());
-        tokens.moveCursor();
-        assertEquals(Symbol.TS_PLUS, tokens.get());
-        tokens.moveCursor();
-        tokens.moveCursor();
-        tokens.moveCursor();
-        assertEquals(Symbol.TS_3, tokens.get());
-        tokens.moveCursor();
-        assertEquals(Symbol.TS_EOF, tokens.get());
+    public void testMoveToNext() {
+        assertEquals(Symbol.TS_9, tokens.current());
+        tokens.moveToNext();
+        assertEquals(Symbol.TS_PLUS, tokens.current());
+        tokens.moveToNext();
+        tokens.moveToNext();
+        tokens.moveToNext();
+        assertEquals(Symbol.TS_3, tokens.current());
+        tokens.moveToNext();
+        assertEquals(Symbol.TS_EOF, tokens.current());
     }
 
     @Test
     public void testHasNext() {
         assertTrue(tokens.hasNext());
-        tokens.moveCursor(); // +
-        tokens.moveCursor(); // 2
-        tokens.moveCursor(); // +
-        tokens.moveCursor(); // 3
-        tokens.moveCursor(); // $
+        tokens.moveToNext(); // +
+        tokens.moveToNext(); // 2
+        tokens.moveToNext(); // +
+        tokens.moveToNext(); // 3
+        tokens.moveToNext(); // $
         assertTrue(tokens.hasNext()); // has $
-        tokens.moveCursor(); // nothing here
+        tokens.moveToNext(); // nothing here
         assertFalse(tokens.hasNext());
     }
 

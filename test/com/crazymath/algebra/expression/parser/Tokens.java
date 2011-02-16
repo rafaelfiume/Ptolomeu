@@ -3,12 +3,11 @@ package com.crazymath.algebra.expression.parser;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.Validate;
 
-final class Tokens implements Iterable<Symbol> {
+final class Tokens {
 
     private final List<Symbol> tokens = new ArrayList<Symbol>();
 
@@ -24,27 +23,22 @@ final class Tokens implements Iterable<Symbol> {
         final Tokens tokens = new Tokens();
         final char[] splited = input.toCharArray();
         for (char aChar : splited) {
-            tokens.add(Symbol.of(aChar));
+            tokens.add(Symbol.lexer(aChar));
         }
         tokens.add(Symbol.TS_EOF);
 
         return tokens;
     }
 
-    @Override
-    public Iterator<Symbol> iterator() {
-        return tokens.iterator(); // TODO Encapsulate iterator
-    }
-
     public boolean hasNext() {
         return cursor < tokens.size();
     }
 
-    void moveCursor() {
+    void moveToNext() {
         cursor++;
     }
 
-    public Symbol get() {
+    public Symbol current() {
         return tokens.get(cursor);
     }
 
