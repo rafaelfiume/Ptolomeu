@@ -12,7 +12,7 @@ final class Sentence {
     private Sentence(String input) {
         Validate.isTrue(isNotBlank(input), "input cannot be blank");
 
-        this.input = deleteWhitespace(input);
+        this.input = input;
     }
 
     static Sentence newInstance(String input) {
@@ -20,7 +20,12 @@ final class Sentence {
     }
 
     Tokens tokenizer() {
-        return Tokens.newInstance(input);
+        return Tokens.newInstance(deleteWhitespace(input));
+    }
+
+    @Override
+    public String toString() {
+        return "'" + input + "'";
     }
 
 }
