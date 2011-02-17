@@ -2,7 +2,7 @@ package com.crazymath.algebra.expression.parser;
 
 enum Symbol {
 
-    TS_PLUS("+"), // TODO Use char instead of Strings for terminals symbols
+    TS_PLUS("+"),
     TS_0("0"),
     TS_1("1"),
     TS_2("2"),
@@ -14,34 +14,29 @@ enum Symbol {
     TS_8("8"),
     TS_9("9"),
     TS_EOF("\0"),
-    TS_INVALID("\1"),
 
     NTS_ADD("ADD"),
     NTS_ADD_2("ADD'"),
     NTS_INT("INT");
 
-    private final String token;
+    private final String symbol;
 
-    Symbol(String token) {
-        this.token = token;
+    Symbol(String symbol) {
+        this.symbol = symbol;
     }
 
-    /*
-     * "Converts a valid token to the corresponding terminal symbol" (Taken from Wikipedia)
-     */
-    final static Symbol of(char token) {
+    final static Symbol lexer(char character) {
 
         for (final Symbol s : values()) {
-            if (s.token.equals(Character.toString(token))) {
+            if (s.symbol.equals(Character.toString(character))) {
                 return s;
             }
         }
 
-        // PENDING See how to deal with error handling
-        throw new IllegalStateException("Cannot parse token '" + token + "'");
+        throw new IllegalStateException("Cannot parse '" + character + "'");
     }
 
-    String getToken() {
-        return token;
+    String symbol() {
+        return symbol;
     }
 }
