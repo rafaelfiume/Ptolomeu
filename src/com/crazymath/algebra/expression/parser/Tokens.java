@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.lang.Validate;
 
+
 final class Tokens {
 
     private final List<Symbol> tokens = new ArrayList<Symbol>();
