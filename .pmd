@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pmd>
     <useProjectRuleSet>false</useProjectRuleSet>
-    <ruleSetFile>/home/rafaelfiume/java/work/git/CrazyMath/pmd-rule-set</ruleSetFile>
+    <ruleSetFile>/home/rafaelfiume/java/work/git/Ptolomeu/pmd-rule-set</ruleSetFile>
     <rules>
         <rule>
             <name>AvoidDecimalLiteralsInBigDecimalConstructor</name>

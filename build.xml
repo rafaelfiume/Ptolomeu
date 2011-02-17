@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="CrazyMath" basedir="." default="build">
+<project name="Ptolomeu" basedir="." default="build">
 
 	<property file="build.properties" />
 
-	<property name="name" value="CrazyMath" />
+	<property name="name" value="Ptolomeu" />
 	<property name="src.dir" value="src" />
 	<property name="test.dir" value="test" />
-	<property name="project.dir" value="${user.home}/java/work/git/CrazyMath" />
+	<property name="project.dir" value="${user.home}/java/work/git/Ptolomeu" />
 	<property name="build.dir" value="${project.dir}/bin" />
 	<property name="lib.dir" value="${project.dir}/lib" />
 
