@@ -9,7 +9,7 @@ import org.apache.commons.lang.Validate;
 
 final class Tokens {
 
-    private final List<Symbol> tokens = new ArrayList<Symbol>();
+    private final List<Symbol> tokens = new ArrayList<>();
 
     private int cursor = 0;
 

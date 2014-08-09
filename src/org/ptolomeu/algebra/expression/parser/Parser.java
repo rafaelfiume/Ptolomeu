@@ -2,15 +2,17 @@ package org.ptolomeu.algebra.expression.parser;
 
 import org.ptolomeu.util.ApoloStack;
 
+import java.util.logging.Logger;
+
 public class Parser {
+
+    private static Logger LOG = Logger.getLogger(Parser.class.getName());
 
     final ParserTable parserTable = ParserTable.newInstance();
 
     final ApoloStack<Symbol> stack = ApoloStack.newInstance();
 
-    String sentence;
-
-    public void checkGrammar(String input) {
+    public boolean checkGrammar(String input) {
         stack.push(Symbol.TS_EOF);
         stack.push(Symbol.NTS_ADD);
 
@@ -20,8 +22,8 @@ public class Parser {
         while (tokens.hasNext()) {
             if (stack.peek() == Symbol.TS_EOF) {
                 stack.pop();
-                System.out.println("Yesss!! Bananas!");
-                break;
+                LOG.info("Yesss!! Bananas!");
+                return true;
             }
 
             if (stack.peek() == tokens.current()) {
@@ -30,7 +32,15 @@ public class Parser {
                 continue;
             }
 
-            switch (parserTable.actionToTake(tokens.current(), stack.peek())) {
+            final Integer actionToTake;
+            try {
+                actionToTake = parserTable.actionToTake(tokens.current(), stack.peek());
+            } catch (IllegalStateException e) {
+                LOG.info("error while parsing the sencence: " + sentence);
+                return false;
+            }
+
+            switch (actionToTake) {
                 case 1:
                     stack.pop();
                     stack.push(Symbol.NTS_ADD_2);
@@ -60,7 +70,7 @@ public class Parser {
 
                 case 6:
                     stack.pop();
-                    stack.push(Symbol.TS_3);
+                    stack.push(Symbol.TS_2);
                     break;
 
                 case 7:
@@ -99,19 +109,16 @@ public class Parser {
                     break;
 
                 default:
-                    throw new IllegalStateException("unknown action: "
-                            + parserTable.actionToTake(tokens.current(), stack.peek()));
-
+                    throw new IllegalStateException("unknown action: " + actionToTake);
             }
         }
 
-        if (!stack.isEmpty()) {
-            throw new IllegalStateException("error while parsing the sencence: " + sentence);
-        }
+        LOG.info("error while parsing the sencence: " + sentence);
+        return false;
     }
 
     public static void main(String... args) {
-        new Parser().checkGrammar("1 + 9 + 0 + 7 + 3 + 5 ");
+        new Parser().checkGrammar("1 + 9 + 0 + 7 + 3 + 5");
     }
 
 }
