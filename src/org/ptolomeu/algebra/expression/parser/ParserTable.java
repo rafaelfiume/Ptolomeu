@@ -8,27 +8,31 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
+ * Click <a href="http://rafaelfiume.wordpress.com/2011/02/16/grammars-and-parsers/">here</a> for an explanation about
+ * the parser table.
+ *
+ * <p/>
  * "LL parser table, maps < non-terminal, terminal> pair to action" (Taken from Wikipedia)
  * 
  * <ol>
- * <li><code>Add -&gt; Int Add'</code></li>
- * <li><code>Add' -&gt; + Int Add'</code></li>
- * <li><code>Add' -&gt;  epsilon</code></li>
- * <li><code>Int -&gt; 0 </code></li>
- * <li><code>Int -&gt; 1 </code></li>
- * <li><code>Int -&gt; 2 </code></li>
- * <li><code>Int -&gt; 3 </code></li>
- * <li><code>Int -&gt; 4 </code></li>
- * <li><code>Int -&gt; 5 </code></li>
- * <li><code>Int -&gt; 6 </code></li>
- * <li><code>Int -&gt; 7 </code></li>
- * <li><code>Int -&gt; 8 </code></li>
- * <li><code>Int -&gt; 9 </code></li>
+ * <li><code>Add -> Int Add'</code></li>
+ * <li><code>Add' -> + Int Add'</code></li>
+ * <li><code>Add' ->  epsilon</code></li>
+ * <li><code>Int -> 0 </code></li>
+ * <li><code>Int -> 1 </code></li>
+ * <li><code>Int -> 2 </code></li>
+ * <li><code>Int -> 3 </code></li>
+ * <li><code>Int -> 4 </code></li>
+ * <li><code>Int -> 5 </code></li>
+ * <li><code>Int -> 6 </code></li>
+ * <li><code>Int -> 7 </code></li>
+ * <li><code>Int -> 8 </code></li>
+ * <li><code>Int -> 9 </code></li>
  * </ol>
  */
 final class ParserTable {
 
-    private final Map<Key, Integer> table = new HashMap<Key, Integer>();
+    private final Map<Key, Integer> table = new HashMap<>();
 
     private ParserTable() {
         // /////////// Filling the first line of the table ///////////////////
