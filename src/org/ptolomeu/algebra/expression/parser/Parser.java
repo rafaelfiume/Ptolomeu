@@ -32,7 +32,7 @@ public class Parser {
                 continue;
             }
 
-            final Integer actionToTake;
+            final Derivations actionToTake;
             try {
                 actionToTake = parserTable.actionToTake(tokens.current(), stack.peek());
             } catch (IllegalStateException e) {
@@ -41,69 +41,69 @@ public class Parser {
             }
 
             switch (actionToTake) {
-                case 1:
+                case REPLACE_ADD_BY_INT_AND_ADD_2:
                     stack.pop();
                     stack.push(Symbol.NTS_ADD_2);
                     stack.push(Symbol.NTS_INT);
                     break;
 
-                case 2:
+                case REPLACE_ADD_2_BY_PLUS_AND_INT_AND_ADD_2:
                     stack.pop();
                     stack.push(Symbol.NTS_ADD_2);
                     stack.push(Symbol.NTS_INT);
                     stack.push(Symbol.TS_PLUS);
                     break;
 
-                case 3:
+                case REPLACE_ADD_2_BY_EOF:
                     stack.pop();
                     break;
 
-                case 4:
+                case REPLACE_INT_BY_0:
                     stack.pop();
                     stack.push(Symbol.TS_0);
                     break;
 
-                case 5:
+                case REPLACE_INT_BY_1:
                     stack.pop();
                     stack.push(Symbol.TS_1);
                     break;
 
-                case 6:
+                case REPLACE_INT_BY_2:
                     stack.pop();
                     stack.push(Symbol.TS_2);
                     break;
 
-                case 7:
+                case REPLACE_INT_BY_3:
                     stack.pop();
                     stack.push(Symbol.TS_3);
                     break;
 
-                case 8:
+                case REPLACE_INT_BY_4:
                     stack.pop();
                     stack.push(Symbol.TS_4);
                     break;
 
-                case 9:
+                case REPLACE_INT_BY_5:
                     stack.pop();
                     stack.push(Symbol.TS_5);
                     break;
 
-                case 10:
+                case REPLACE_INT_BY_6:
                     stack.pop();
                     stack.push(Symbol.TS_6);
                     break;
 
-                case 11:
+                case REPLACE_INT_BY_7:
                     stack.pop();
                     stack.push(Symbol.TS_7);
                     break;
 
-                case 12:
+                case REPLACE_INT_BY_8:
                     stack.pop();
                     stack.push(Symbol.TS_8);
                     break;
 
-                case 13:
+                case REPLACE_INT_BY_9:
                     stack.pop();
                     stack.push(Symbol.TS_9);
                     break;
