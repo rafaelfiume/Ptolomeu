@@ -1,3 +1,5 @@
-/bin/*
-/reports/*
+.DS_Store
+.idea/*
+ptolomeu.iml
+/target/*
 

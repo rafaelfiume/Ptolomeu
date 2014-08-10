@@ -1,9 +1,9 @@
 package org.ptolomeu.algebra.expression.parser;
 
-import static org.apache.commons.lang.StringUtils.deleteWhitespace;
-import static org.apache.commons.lang.StringUtils.isNotBlank;
+import org.apache.commons.lang3.Validate;
 
-import org.apache.commons.lang.Validate;
+import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 final class Sentence {
 

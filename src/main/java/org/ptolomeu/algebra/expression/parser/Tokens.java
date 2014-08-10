@@ -1,11 +1,11 @@
 package org.ptolomeu.algebra.expression.parser;
 
-import static org.apache.commons.lang.StringUtils.isNotBlank;
+import org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.Validate;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 final class Tokens {
 
