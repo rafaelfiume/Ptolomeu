@@ -19,32 +19,30 @@ public class Parser {
         final Sentence sentence = Sentence.newInstance(input);
         final Tokens tokens = sentence.tokenizer();
 
-        while (tokens.hasNext()) {
-            if (stack.peek() == Symbol.TS_EOF) {
-                stack.pop();
-                LOG.info("Yesss!! Bananas!");
-                return true;
-            }
+        return doCheckGrammar(sentence, tokens);
+    }
 
-            if (stack.peek() == tokens.current()) {
-                stack.pop();
-                tokens.moveToNext();
-            }
-
-            try {
-                parserTable.actionToTake(tokens.current(), stack.peek()).derive(stack);
-            } catch (IllegalStateException e) {
-                break; // horrible... bleeeeerrrgh. It will disappear in a few commits
-            }
-
+    private boolean doCheckGrammar(Sentence sentence, Tokens tokens) {
+        if (stack.peek() == Symbol.TS_EOF) {
+            stack.pop();
+            LOG.info("Yesss!! Bananas!");
+            return true;
         }
 
-        LOG.info("error while parsing the sencence: " + sentence);
-        return false;
-    }
+        if (stack.peek() == tokens.current()) {
+            stack.pop();
+            tokens.moveToNext();
+            return doCheckGrammar(sentence, tokens);
+        }
 
-    public static void main(String... args) {
-        new Parser().checkGrammar("1 + 9 + 0 + 7 + 3 + 5");
-    }
+        try {
+            parserTable.actionToTake(tokens.current(), stack.peek()).derive(stack);
+            return doCheckGrammar(sentence, tokens);
 
+        } catch (IllegalStateException e) {
+            LOG.info("error while parsing the sencence " + sentence + ": " + e.getMessage());
+            return false; // horrible... bleeeeerrrgh. It will disappear in a few commits
+        }
+
+    }
 }
