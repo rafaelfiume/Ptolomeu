@@ -1,19 +1,23 @@
 package org.ptolomeu.algebra.expression;
 
-public class AdditionExp implements MathExp {
+public class AdditionExp extends AbstractNode {
 
-    private final MathExp operand1;
-
-    private final MathExp operand2;
-
-    public AdditionExp(MathExp operand1, MathExp operand2) {
-        this.operand1 = operand1;
-        this.operand2 = operand2;
+    public AdditionExp() {
+    }
+    
+    // TODO RF Is this constructor going to be used apart from testing code?
+    public AdditionExp(AbstractNode left, AbstractNode right) {
+        super(left, right);
     }
 
     @Override
     public Integer evaluate(Context context) {
-        return operand1.evaluate(context) + operand2.evaluate(context);
+        return left().evaluate(context) + right().evaluate(context);
+    }
+
+    @Override
+    public Integer evaluate() {
+        return left().evaluate() + right().evaluate();
     }
 
 }

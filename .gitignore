@@ -2,4 +2,8 @@
 .idea/*
 ptolomeu.iml
 /target/*
+/target/
+.classpath
+.project
+.settings/*
 

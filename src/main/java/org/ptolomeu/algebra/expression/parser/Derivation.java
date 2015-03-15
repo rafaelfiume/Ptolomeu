@@ -4,6 +4,6 @@ import org.ptolomeu.util.ApoloStack;
 
 public interface Derivation {
 
-    void derive(ApoloStack<Symbol> input);
+    void derive(ApoloStack<Symbol> parserStack);
 
 }

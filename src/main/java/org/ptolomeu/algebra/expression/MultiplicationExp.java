@@ -16,5 +16,10 @@ public class MultiplicationExp implements MathExp {
     public Integer evaluate(Context context) {
         return operand1.evaluate(context) * operand2.evaluate(context);
     }
+    
+    @Override
+    public Integer evaluate() {
+        return operand1.evaluate() * operand2.evaluate();
+    }
 
 }

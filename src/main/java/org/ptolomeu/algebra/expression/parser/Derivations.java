@@ -9,10 +9,10 @@ public enum Derivations implements Derivation {
     // Replacing Add...
     REPLACE_ADD_BY_INT_AND_ADD_2 {
         @Override
-        public void derive(ApoloStack<Symbol> stack) {
-            stack.pop();
-            stack.push(NTS_ADD_2);
-            stack.push(NTS_INT);
+        public void derive(ApoloStack<Symbol> parserStack) {
+            parserStack.pop();
+            parserStack.push(NTS_ADD_2);
+            parserStack.push(NTS_INT);
         }
     },
 
@@ -33,7 +33,7 @@ public enum Derivations implements Derivation {
         }
     },
 
-    // Replacing Int...
+    // Replacing Int by TS_*. It needs to keep the Symbol there so the parser table know what comes next
     REPLACE_INT_BY_0 {
         @Override
         public void derive(ApoloStack<Symbol> stack) {

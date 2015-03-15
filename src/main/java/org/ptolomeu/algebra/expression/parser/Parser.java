@@ -10,38 +10,38 @@ public class Parser {
 
     final ParserTable parserTable = ParserTable.newInstance();
 
-    final ApoloStack<Symbol> stack = ApoloStack.newInstance();
+    final ApoloStack<Symbol> parserStack = ApoloStack.newInstance();
 
-    public boolean checkGrammar(String input) {
-        stack.push(Symbol.TS_EOF);
-        stack.push(Symbol.NTS_ADD);
+    public Integer parse(String input) {
+        parserStack.push(Symbol.TS_EOF);
+        parserStack.push(Symbol.NTS_ADD);
 
         final Sentence sentence = Sentence.newInstance(input);
         final Tokens tokens = sentence.tokenizer();
 
-        return doCheckGrammar(sentence, tokens);
+        return doParse(sentence, tokens, new BinaryExpressionTreeBuilder());
     }
 
-    private boolean doCheckGrammar(Sentence sentence, Tokens tokens) {
-        if (stack.peek() == Symbol.TS_EOF) {
-            stack.pop();
+    private Integer doParse(Sentence sentence, Tokens tokens, BinaryExpressionTreeBuilder treeBuilder) {
+        if (parserStack.peek() == Symbol.TS_EOF) {
+            parserStack.pop(); // TODO RF Is this necessary?
             LOG.info("Yesss!! Bananas!");
-            return true;
+            return treeBuilder.build().evaluate();
         }
 
-        if (stack.peek() == tokens.current()) {
-            stack.pop();
+        if (parserStack.peek() == tokens.current()) {
+            treeBuilder.add(parserStack.pop());
             tokens.moveToNext();
-            return doCheckGrammar(sentence, tokens);
+            return doParse(sentence, tokens, treeBuilder);
         }
 
         try {
-            parserTable.actionToTake(tokens.current(), stack.peek()).derive(stack);
-            return doCheckGrammar(sentence, tokens);
+            parserTable.actionToTake(tokens.current(), parserStack.peek()).derive(parserStack);
+            return doParse(sentence, tokens, treeBuilder);
 
         } catch (IllegalStateException e) {
             LOG.info("error while parsing the sencence " + sentence + ": " + e.getMessage());
-            return false; // horrible... bleeeeerrrgh. It will disappear in a few commits
+            return -1; // horrible... bleeeeerrrgh. It will disappear in a few commits
         }
 
     }
