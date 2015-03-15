@@ -1,11 +1,16 @@
-package org.ptolomeu.algebra.expression;
+package org.ptolomeu.algebra.expression.tree;
 
 import static org.junit.Assert.assertSame;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.ptolomeu.algebra.expression.tree.Constant;
+import org.ptolomeu.algebra.expression.tree.Context;
+import org.ptolomeu.algebra.expression.tree.MultiplicationExp;
+import org.ptolomeu.algebra.expression.tree.SubtractionExp;
+import org.ptolomeu.algebra.expression.tree.VariableExp;
 
-public class SimpleBinaryMathExpressionTest {
+public class VariableExpressionTest {
 
     private VariableExp a;
 

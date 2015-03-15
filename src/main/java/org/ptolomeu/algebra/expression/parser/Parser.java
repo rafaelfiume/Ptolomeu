@@ -1,6 +1,6 @@
 package org.ptolomeu.algebra.expression.parser;
 
-import org.ptolomeu.util.ApoloStack;
+import org.ptolomeu.util.Stack;
 
 import java.util.logging.Logger;
 
@@ -10,7 +10,7 @@ public class Parser {
 
     final ParserTable parserTable = ParserTable.newInstance();
 
-    final ApoloStack<Symbol> parserStack = ApoloStack.newInstance();
+    final Stack<Symbol> parserStack = Stack.newInstance();
 
     public Integer parse(String input) {
         parserStack.push(Symbol.TS_EOF);
@@ -19,10 +19,10 @@ public class Parser {
         final Sentence sentence = Sentence.newInstance(input);
         final Tokens tokens = sentence.tokenizer();
 
-        return doParse(sentence, tokens, new BinaryExpressionTreeBuilder());
+        return doParse(sentence, tokens, new ExpressionTreeBuilder());
     }
 
-    private Integer doParse(Sentence sentence, Tokens tokens, BinaryExpressionTreeBuilder treeBuilder) {
+    private Integer doParse(Sentence sentence, Tokens tokens, ExpressionTreeBuilder treeBuilder) {
         if (parserStack.peek() == Symbol.TS_EOF) {
             parserStack.pop(); // TODO RF Is this necessary?
             LOG.info("Yesss!! Bananas!");

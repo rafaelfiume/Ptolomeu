@@ -1,4 +1,4 @@
-package org.ptolomeu.algebra.expression;
+package org.ptolomeu.algebra.expression.tree;
 
 public abstract class AbstractNode implements MathExp, Node<AbstractNode> {
     

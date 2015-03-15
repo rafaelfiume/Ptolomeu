@@ -5,10 +5,12 @@ import static org.ptolomeu.algebra.expression.parser.Symbol.*;
 import static org.hamcrest.Matchers.*;
 
 import org.junit.Test;
-import org.ptolomeu.algebra.expression.MathExp;
+import org.ptolomeu.algebra.expression.tree.MathExp;
 
-public class BinaryExpressionTreeBuilderTest {
-    
+public class ExpressionTreeBuilderTest {
+
+    //   Binary Expression Tree
+    //
     //          1 + 9 + 4
     //
     //   root ->   +
@@ -19,7 +21,7 @@ public class BinaryExpressionTreeBuilderTest {
 
     @Test
     public void buildBinaryExpressionTree() throws Exception {
-        MathExp exp = new BinaryExpressionTreeBuilder()
+        MathExp exp = new ExpressionTreeBuilder()
             .add(TS_1)
             .add(TS_PLUS)
             .add(TS_4)

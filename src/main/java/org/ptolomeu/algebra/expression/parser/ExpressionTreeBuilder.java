@@ -3,16 +3,16 @@ package org.ptolomeu.algebra.expression.parser;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 
-import org.ptolomeu.algebra.expression.AbstractNode;
-import org.ptolomeu.algebra.expression.AdditionExp;
-import org.ptolomeu.algebra.expression.Constant;
-import org.ptolomeu.algebra.expression.MathExp;
+import org.ptolomeu.algebra.expression.tree.AbstractNode;
+import org.ptolomeu.algebra.expression.tree.AdditionExp;
+import org.ptolomeu.algebra.expression.tree.Constant;
+import org.ptolomeu.algebra.expression.tree.MathExp;
 
-public class BinaryExpressionTreeBuilder {
+public class ExpressionTreeBuilder {
     
     private AbstractNode root;
 
-    public BinaryExpressionTreeBuilder add(Symbol symbol) {
+    public ExpressionTreeBuilder add(Symbol symbol) {
         switch (symbol) {
             case TS_0:
             case TS_1:

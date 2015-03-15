@@ -1,9 +1,11 @@
-package org.ptolomeu.algebra.expression;
+package org.ptolomeu.algebra.expression.tree;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+import org.ptolomeu.algebra.expression.tree.AdditionExp;
+import org.ptolomeu.algebra.expression.tree.Constant;
 
 public class BinaryMathExpressionTest {
     

@@ -1,9 +1,9 @@
 package org.ptolomeu.algebra.expression.parser;
 
-import org.ptolomeu.util.ApoloStack;
+import org.ptolomeu.util.Stack;
 
 public interface Derivation {
 
-    void derive(ApoloStack<Symbol> parserStack);
+    void derive(Stack<Symbol> parserStack);
 
 }

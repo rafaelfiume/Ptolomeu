@@ -1,4 +1,4 @@
-package org.ptolomeu.algebra.expression;
+package org.ptolomeu.algebra.expression.tree;
 
 public class AdditionExp extends AbstractNode {
 

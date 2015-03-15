@@ -3,16 +3,16 @@ package org.ptolomeu.util;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public final class ApoloStack<T> {
+public final class Stack<T> {
 
     private final Deque<T> deque = new ArrayDeque<T>();
 
-    private ApoloStack() {
+    private Stack() {
         // Instantiated via method factory
     }
 
-    public static <E> ApoloStack<E> newInstance() {
-        return new ApoloStack<E>();
+    public static <E> Stack<E> newInstance() {
+        return new Stack<E>();
     }
 
     public void push(T element) {
