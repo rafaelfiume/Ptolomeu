@@ -34,7 +34,21 @@
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.yatspec</groupId>
+            <artifactId>yatspec</artifactId>
+            <version>1.6</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+    
+    <repositories>
+        <repository>
+            <id>repo.bodar.com</id>
+            <url>http://repo.bodar.com</url>
+        </repository>
+    </repositories>
+    
     <build>
         <finalName>Ptolomeu</finalName>
         <plugins>
