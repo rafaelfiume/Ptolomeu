@@ -1,17 +1,23 @@
 package org.ptolomeu.algebra.expression.parser;
 
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_2;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_3;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_9;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_EOF;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_PLUS;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertThat;
-import static org.ptolomeu.algebra.expression.parser.Symbol.*;
+public class ScannerTest {
 
-public class TokenizerTest {
-
-    private Tokens tokens;
+    private Scanner tokens;
 
     @Before
     public void setUp() {
@@ -38,15 +44,15 @@ public class TokenizerTest {
         assertTrue(tokens.hasNext());
 
         assertThat(tokens.nextToken(), is(TS_PLUS));
-        assertThat(tokens.nextToken(), is(TS_2)); // 2
-        assertThat(tokens.nextToken(), is(TS_PLUS)); // +
-        assertThat(tokens.nextToken(), is(TS_3)); // 3
+        assertThat(tokens.nextToken(), is(TS_2));
+        assertThat(tokens.nextToken(), is(TS_PLUS));
+        assertThat(tokens.nextToken(), is(TS_3));
         assertTrue(tokens.hasNext());
 
-        assertThat(tokens.nextToken(), is(TS_EOF)); // $
-        assertFalse(tokens.hasNext()); // has $
+        assertThat(tokens.nextToken(), is(TS_EOF));
+        assertFalse(tokens.hasNext());
 
-        assertThat(tokens.nextToken(), is(nullValue())); // nothing here
+        assertThat(tokens.nextToken(), is(nullValue()));
         assertFalse(tokens.hasNext());
     }
 

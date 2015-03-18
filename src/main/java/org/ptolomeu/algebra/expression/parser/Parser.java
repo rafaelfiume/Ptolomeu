@@ -17,12 +17,12 @@ public class Parser {
         parserStack.push(Symbol.NTS_EXP);
 
         final Sentence sentence = Sentence.newInstance(input);
-        final Tokens tokens = sentence.tokenizer();
+        final Scanner tokens = sentence.tokenizer();
 
         return doParse(sentence, tokens, new ExpressionTreeBuilder());
     }
 
-    private Integer doParse(Sentence sentence, Tokens tokens, ExpressionTreeBuilder treeBuilder) {
+    private Integer doParse(Sentence sentence, Scanner tokens, ExpressionTreeBuilder treeBuilder) {
         if (parserStack.peek() == Symbol.TS_EOF) {
             return treeBuilder.build().evaluate(); // Bananas!!
         }

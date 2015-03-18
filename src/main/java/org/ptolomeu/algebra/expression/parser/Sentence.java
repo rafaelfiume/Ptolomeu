@@ -19,8 +19,8 @@ final class Sentence {
         return new Sentence(input);
     }
 
-    Tokens tokenizer() {
-        return Tokens.newInstance(deleteWhitespace(input));
+    Scanner tokenizer() {
+        return Scanner.newInstance(deleteWhitespace(input));
     }
 
     @Override
