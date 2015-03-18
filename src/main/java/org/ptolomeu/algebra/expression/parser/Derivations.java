@@ -7,33 +7,44 @@ import static org.ptolomeu.algebra.expression.parser.Symbol.*;
 public enum Derivations implements Derivation {
 
     // Replacing Add...
-    REPLACE_ADD_BY_INT_AND_ADD_2 {
+    REPLACE_EXP_BY_INT_AND_OPER {
         @Override
         public void derive(Stack<Symbol> parserStack) {
             parserStack.pop();
-            parserStack.push(NTS_ADD_2);
+            parserStack.push(NTS_OPER);
             parserStack.push(NTS_INT);
         }
     },
 
-    // Replacing Add'
-    REPLACE_ADD_2_BY_PLUS_AND_INT_AND_ADD_2 {
+    /*
+     * Replacing Oper by Exp: Exp -> Int Oper
+     */
+    REPLACE_OPER_BY_PLUS_AND_EXP {
         @Override
         public void derive(Stack<Symbol> stack) {
             stack.pop();
-            stack.push(NTS_ADD_2);
+            stack.push(NTS_OPER);
             stack.push(NTS_INT);
             stack.push(TS_PLUS);
         }
     },
-    REPLACE_ADD_2_BY_EOF {
+    REPLACE_OPER_BY_MINUS_AND_EXP {
+        @Override
+        public void derive(Stack<Symbol> stack) {
+            stack.pop();
+            stack.push(NTS_OPER);
+            stack.push(NTS_INT);
+            stack.push(TS_MINUS);
+        }
+    },
+    REPLACE_OPER_BY_EOF {
         @Override
         public void derive(Stack<Symbol> stack) {
             stack.pop();
         }
     },
 
-    // Replacing Int by TS_*. It needs to keep the Symbol there so the parser table know what comes next
+    // Replacing Int by TS_*. It needs to keep the Symbol there so the parser table knows what comes next
     REPLACE_INT_BY_0 {
         @Override
         public void derive(Stack<Symbol> stack) {

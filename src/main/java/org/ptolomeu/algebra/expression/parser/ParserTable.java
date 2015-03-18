@@ -17,9 +17,10 @@ import static org.ptolomeu.algebra.expression.parser.Derivations.*;
  * "LL parser table, maps < non-terminal, terminal> pair to action" (Taken from Wikipedia)
  * 
  * <ol>
- * <li><code>Add -> Int Add'</code></li>
- * <li><code>Add' -> + Int Add'</code></li>
- * <li><code>Add' ->  epsilon</code></li>
+ * <li><code>Exp -> Int Oper</code></li>
+ * <li><code>Oper -> + Exp</code></li>
+ * <li><code>Oper -> - Exp</code></li>
+ * <li><code>Oper -> epsilon</code></li>
  * <li><code>Int -> 0 </code></li>
  * <li><code>Int -> 1 </code></li>
  * <li><code>Int -> 2 </code></li>
@@ -38,19 +39,20 @@ final class ParserTable {
 
     private ParserTable() {
         // /////////// Filling the first line of the table ///////////////////
-        table.put(new Key(Symbol.TS_0, Symbol.NTS_ADD), REPLACE_ADD_BY_INT_AND_ADD_2);
-        table.put(new Key(Symbol.TS_1, Symbol.NTS_ADD), REPLACE_ADD_BY_INT_AND_ADD_2);
-        table.put(new Key(Symbol.TS_2, Symbol.NTS_ADD), REPLACE_ADD_BY_INT_AND_ADD_2);
-        table.put(new Key(Symbol.TS_3, Symbol.NTS_ADD), REPLACE_ADD_BY_INT_AND_ADD_2);
-        table.put(new Key(Symbol.TS_4, Symbol.NTS_ADD), REPLACE_ADD_BY_INT_AND_ADD_2);
-        table.put(new Key(Symbol.TS_5, Symbol.NTS_ADD), REPLACE_ADD_BY_INT_AND_ADD_2);
-        table.put(new Key(Symbol.TS_6, Symbol.NTS_ADD), REPLACE_ADD_BY_INT_AND_ADD_2);
-        table.put(new Key(Symbol.TS_7, Symbol.NTS_ADD), REPLACE_ADD_BY_INT_AND_ADD_2);
-        table.put(new Key(Symbol.TS_8, Symbol.NTS_ADD), REPLACE_ADD_BY_INT_AND_ADD_2);
-        table.put(new Key(Symbol.TS_9, Symbol.NTS_ADD), REPLACE_ADD_BY_INT_AND_ADD_2);
+        table.put(new Key(Symbol.TS_0, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(Symbol.TS_1, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(Symbol.TS_2, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(Symbol.TS_3, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(Symbol.TS_4, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(Symbol.TS_5, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(Symbol.TS_6, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(Symbol.TS_7, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(Symbol.TS_8, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(Symbol.TS_9, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
         // /////////// Filling the second line of the table //////////////////
-        table.put(new Key(Symbol.TS_PLUS, Symbol.NTS_ADD_2), REPLACE_ADD_2_BY_PLUS_AND_INT_AND_ADD_2);
-        table.put(new Key(Symbol.TS_EOF, Symbol.NTS_ADD_2), REPLACE_ADD_2_BY_EOF);
+        table.put(new Key(Symbol.TS_PLUS, Symbol.NTS_OPER), REPLACE_OPER_BY_PLUS_AND_EXP);
+        table.put(new Key(Symbol.TS_MINUS, Symbol.NTS_OPER), REPLACE_OPER_BY_MINUS_AND_EXP);
+        table.put(new Key(Symbol.TS_EOF, Symbol.NTS_OPER), REPLACE_OPER_BY_EOF);
         // /////////// Filling the third line of the table //////////////////
         table.put(new Key(Symbol.TS_0, Symbol.NTS_INT), REPLACE_INT_BY_0);
         table.put(new Key(Symbol.TS_1, Symbol.NTS_INT), REPLACE_INT_BY_1);
@@ -68,11 +70,11 @@ final class ParserTable {
         return new ParserTable();
     }
 
-    Derivations actionToTake(Symbol inputToken, Symbol topOfStack) {
-        final Derivations action = table.get(new Key(inputToken, topOfStack));
+    Derivations actionToTake(Symbol nextToken, Symbol currentNonTerminal) {
+        final Derivations action = table.get(new Key(nextToken, currentNonTerminal));
 
         if (action == null) {
-            throw new IllegalStateException("unknown operation for: " + inputToken);
+            throw new IllegalStateException("unknown operation for: " + nextToken);
         }
 
         return action;

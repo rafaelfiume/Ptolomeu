@@ -12,27 +12,20 @@ import org.ptolomeu.algebra.expression.tree.VariableExp;
 
 public class VariableExpressionTest {
 
-    private VariableExp a;
+    private VariableExp a = new VariableExp("a");
+    private VariableExp b = new VariableExp("b");
+    private VariableExp c = new VariableExp("c");
 
-    private VariableExp b;
-
-    private VariableExp c;
-
-    private Context context;
+    private Context context = new Context();
 
     @Before
     public void setUp() {
-        a = new VariableExp("a");
-        b = new VariableExp("b");
-        c = new VariableExp("c");
-
-        context = new Context();
         context.assign(a, 2);
         context.assign(b, 4);
         context.assign(c, 10);
     }
     
-    // TODO RF Uncomment these tests when implementing parsing subtraction and multiplication
+    // TODO RF Uncomment these tests when implementing support for variables
 
 //    @Test
 //    public void testAddExpression() {
@@ -41,37 +34,37 @@ public class VariableExpressionTest {
 //        assertSame(6, result);
 //    }
 
-//    @Test
-//    public void testAddExpressionWithConstant() {
-//        final AdditionExp add = new AdditionExp(a, new Constant(-5));
-//        final Integer result = add.evaluate(context);
-//        assertSame(-3, result);
-//    }
-
-//    @Test
-//    public void testCompositeAddExpression() {
-//        final AdditionExp add = new AdditionExp(a, new AdditionExp(b, c));
-//        final Integer result = add.evaluate(context);
-//        assertSame(16, result);
-//    }
-
     @Test
-    public void testSubtractionExpression() {
-        final SubtractionExp add = new SubtractionExp(a, b);
+    public void testAddExpressionWithConstant() {
+        final AdditionExp add = new AdditionExp(new Constant(2), new Constant(-5));
         final Integer result = add.evaluate(context);
-        assertSame(-2, result);
+        assertSame(-3, result);
     }
 
     @Test
+    public void testCompositeAddExpression() {
+        final AdditionExp add = new AdditionExp(new Constant(19), new AdditionExp(new Constant(2), new Constant(-5)));
+        final Integer result = add.evaluate(context);
+        assertSame(16, result);
+    }
+
+//    @Test
+//    public void testSubtractionExpression() {
+//        final SubtractionExp add = new SubtractionExp(a, b);
+//        final Integer result = add.evaluate(context);
+//        assertSame(-2, result);
+//    }
+
+    @Test
     public void testSubtractionExpressionWithConstant() {
-        final SubtractionExp add = new SubtractionExp(a, new Constant(-5));
+        final SubtractionExp add = new SubtractionExp(new Constant(10), new Constant(3));
         final Integer result = add.evaluate(context);
         assertSame(7, result);
     }
 
     @Test
     public void testCompositeSubtractionExpression() {
-        final SubtractionExp add = new SubtractionExp(a, new SubtractionExp(b, c));
+        final SubtractionExp add = new SubtractionExp(new Constant(5), new AdditionExp(new Constant(2), new Constant(-5)));
         final Integer result = add.evaluate(context);
         assertSame(8, result);
     }

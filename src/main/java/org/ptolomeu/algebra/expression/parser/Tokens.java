@@ -31,11 +31,12 @@ final class Tokens {
     }
 
     public boolean hasNext() {
-        return cursor < tokens.size();
+        return cursor < (tokens.size() - 1);
     }
 
-    void moveToNext() {
-        cursor++;
+    Symbol nextToken() {
+        return hasNext() ? tokens.get(++cursor) : null;
+
     }
 
     public Symbol current() {

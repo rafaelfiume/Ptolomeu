@@ -1,25 +1,23 @@
 package org.ptolomeu.algebra.expression.tree;
 
-public class SubtractionExp implements MathExp {
+public class SubtractionExp extends AbstractNode {
 
-    // TODO Create abstract class to eliminate repetition
-    private final MathExp operand1;
+    public SubtractionExp() {
+    }
 
-    private final MathExp operand2;
-
-    public SubtractionExp(MathExp operand1, MathExp operand2) {
-        this.operand1 = operand1;
-        this.operand2 = operand2;
+    // TODO RF Is this constructor going to be used apart from testing code?
+    public SubtractionExp(AbstractNode left, AbstractNode right) {
+        super(left, right);
     }
 
     @Override
     public Integer evaluate(Context context) {
-        return operand1.evaluate(context) - operand2.evaluate(context);
+        return left().evaluate(context) - right().evaluate(context);
     }
     
     @Override
     public Integer evaluate() {
-        return operand1.evaluate() - operand2.evaluate();
+        return left().evaluate() - right().evaluate();
     }
     
 }

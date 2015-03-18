@@ -3,6 +3,7 @@ package org.ptolomeu.algebra.expression.parser;
 enum Symbol {
 
     TS_PLUS("+"),
+    TS_MINUS("-"),
     TS_0("0"),
     TS_1("1"),
     TS_2("2"),
@@ -15,8 +16,8 @@ enum Symbol {
     TS_9("9"),
     TS_EOF("\0"),
 
-    NTS_ADD("ADD"),
-    NTS_ADD_2("ADD'"),
+    NTS_EXP("EXP"),
+    NTS_OPER("OPER"),
     NTS_INT("INT");
 
     private final String symbol;
