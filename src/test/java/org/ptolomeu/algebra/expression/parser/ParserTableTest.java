@@ -10,7 +10,7 @@ import com.googlecode.yatspec.junit.SpecRunner;
 import com.googlecode.yatspec.junit.Table;
 
 import static org.junit.Assert.*;
-import static org.ptolomeu.algebra.expression.parser.Derivations.*;
+import static org.ptolomeu.algebra.expression.parser.Derivation.*;
 import static org.ptolomeu.algebra.expression.parser.Symbol.*;
 
 @RunWith(SpecRunner.class)
@@ -22,56 +22,56 @@ public class ParserTableTest {
 
     @Test
     @Table({
-        @Row({"0", "EXP", "EXP -> INT OPER"}),
-        @Row({"1", "EXP", "EXP -> INT OPER"}),
-        @Row({"2", "EXP", "EXP -> INT OPER"}),
-        @Row({"3", "EXP", "EXP -> INT OPER"}),
-        @Row({"4", "EXP", "EXP -> INT OPER"}),
-        @Row({"5", "EXP", "EXP -> INT OPER"}),
-        @Row({"6", "EXP", "EXP -> INT OPER"}),
-        @Row({"7", "EXP", "EXP -> INT OPER"}),
-        @Row({"8", "EXP", "EXP -> INT OPER"}),
-        @Row({"9", "EXP", "EXP -> INT OPER"}),        
-        @Row({"+", "OPER", "OPER -> + EXP"}),
-        @Row({"-", "OPER", "OPER -> - EXP"}),
-        @Row({EOF, "OPER", "OPER -> epsilon"}),
-        @Row({"0", "INT", "INT -> 0"}),
-        @Row({"1", "INT", "INT -> 1"}),
-        @Row({"2", "INT", "INT -> 2"}),
-        @Row({"3", "INT", "INT -> 3"}),
-        @Row({"4", "INT", "INT -> 4"}),
-        @Row({"5", "INT", "INT -> 5"}),
-        @Row({"6", "INT", "INT -> 6"}),
-        @Row({"7", "INT", "INT -> 7"}),
-        @Row({"8", "INT", "INT -> 8"}),
-        @Row({"9", "INT", "INT -> 9"})
-        })
-    public void deriveToken(String nextToken, String nonTerminal, String derivation) throws Exception {
-        assertThat(parserTable.actionToTake(forNextToken(nextToken), andNonTerminal(nonTerminal)), is(derivation));
+        @Row({"EXP", "0", "EXP -> INT OPER"}),
+        @Row({"EXP", "1", "EXP -> INT OPER"}),
+        @Row({"EXP", "2", "EXP -> INT OPER"}),
+        @Row({"EXP", "3", "EXP -> INT OPER"}),
+        @Row({"EXP", "4", "EXP -> INT OPER"}),
+        @Row({"EXP", "5", "EXP -> INT OPER"}),
+        @Row({"EXP", "6", "EXP -> INT OPER"}),
+        @Row({"EXP", "7", "EXP -> INT OPER"}),
+        @Row({"EXP", "8", "EXP -> INT OPER"}),
+        @Row({"EXP", "9", "EXP -> INT OPER"}), 
+        @Row({"OPER", "+", "OPER -> + EXP"}),
+        @Row({"OPER", "-", "OPER -> - EXP"}),
+        @Row({"OPER", EOF, "OPER -> epsilon"}),
+        @Row({"INT", "0", "INT -> 0"}),
+        @Row({"INT", "1", "INT -> 1"}),
+        @Row({"INT", "2", "INT -> 2"}),
+        @Row({"INT", "3", "INT -> 3"}),
+        @Row({"INT", "4", "INT -> 4"}),
+        @Row({"INT", "5", "INT -> 5"}),
+        @Row({"INT", "6", "INT -> 6"}),
+        @Row({"INT", "7", "INT -> 7"}),
+        @Row({"INT", "8", "INT -> 8"}),
+        @Row({"INT", "9", "INT -> 9"})
+    })
+    public void deriveToken(String nonTerminal, String lookahead, String derivation) throws Exception {
+        assertThat(parserTable.actionToTake(forNonTerminal(nonTerminal), andNextTerminal(lookahead)), is(derivation));
     }
     
     @Test
     public void invalidDerivation() {
         // ADD
         try {
-            parserTable.actionToTake(TS_0, NTS_EXP);
+            parserTable.actionToTake(NTS_EXP, TS_0);
             // fail
         } catch (IllegalStateException e) {
             assertEquals("unknown operation for: " + TS_0, e.getMessage());
         }
     }
     
-    private Symbol andNonTerminal(String currentNonTerminal) {
+    private Symbol forNonTerminal(String currentNonTerminal) {
         return Symbol.valueOf("NTS_" + currentNonTerminal);
     }
 
-    private Symbol forNextToken(String token) {
+    private Symbol andNextTerminal(String token) {
         if (EOF.equals(token)) return Symbol.TS_EOF;
         
         return Symbol.lexer(token.charAt(0));
     }
     
-    private Matcher<Derivations> is(String derivation) {
+    private Matcher<Derivation> is(String derivation) {
         switch(derivation) {
             case "EXP -> INT OPER": return Matchers.is(REPLACE_EXP_BY_INT_AND_OPER);
             case "OPER -> + EXP": return Matchers.is(REPLACE_OPER_BY_PLUS_AND_EXP);

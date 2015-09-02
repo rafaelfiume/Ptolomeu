@@ -8,6 +8,11 @@ import static org.junit.Assert.assertThat;
 public class ParserTest {
 
     private final Parser parser = new Parser();
+    
+    @Test
+    public void digit() {
+        assertThat(parser.parse("2"), is(2));
+    }
 
     @Test
     public void addition() {

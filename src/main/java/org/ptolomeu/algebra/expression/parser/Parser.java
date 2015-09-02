@@ -34,7 +34,7 @@ public class Parser {
         }
 
         try {
-            parserTable.actionToTake(tokens.current(), parserStack.peek()).derive(parserStack);
+            parserTable.actionToTake(parserStack.peek(), tokens.current()).derive(parserStack);
             return doParse(sentence, tokens, treeBuilder);
 
         } catch (IllegalStateException e) {

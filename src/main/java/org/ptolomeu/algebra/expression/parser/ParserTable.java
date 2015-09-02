@@ -1,20 +1,49 @@
 package org.ptolomeu.algebra.expression.parser;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_EXP_BY_INT_AND_OPER;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_0;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_1;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_2;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_3;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_4;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_5;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_6;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_7;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_8;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_9;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_OPER_BY_EOF;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_OPER_BY_MINUS_AND_EXP;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_OPER_BY_PLUS_AND_EXP;
+import static org.ptolomeu.algebra.expression.parser.Symbol.NTS_EXP;
+import static org.ptolomeu.algebra.expression.parser.Symbol.NTS_INT;
+import static org.ptolomeu.algebra.expression.parser.Symbol.NTS_OPER;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_0;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_1;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_2;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_3;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_4;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_5;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_6;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_7;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_8;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_9;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_EOF;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_MINUS;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_PLUS;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.ptolomeu.algebra.expression.parser.Derivations.*;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
+ * It decides the next action to take based on the current nonterminal and the next terminal (lookahead) being parsed.</p>
  * Click <a href="http://rafaelfiume.wordpress.com/2011/02/16/grammars-and-parsers/">here</a> for an explanation about
  * the parser table.
  *
  * <p/>
- * "LL parser table, maps < non-terminal, terminal> pair to action" (Taken from Wikipedia)
  * 
  * <ol>
  * <li><code>Exp -> Int Oper</code></li>
@@ -35,60 +64,63 @@ import static org.ptolomeu.algebra.expression.parser.Derivations.*;
  */
 final class ParserTable {
 
-    private final Map<Key, Derivations> table = new HashMap<>();
+    private final Map<Key, Derivation> table = new HashMap<>();
 
     private ParserTable() {
-        // /////////// Filling the first line of the table ///////////////////
-        table.put(new Key(Symbol.TS_0, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
-        table.put(new Key(Symbol.TS_1, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
-        table.put(new Key(Symbol.TS_2, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
-        table.put(new Key(Symbol.TS_3, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
-        table.put(new Key(Symbol.TS_4, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
-        table.put(new Key(Symbol.TS_5, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
-        table.put(new Key(Symbol.TS_6, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
-        table.put(new Key(Symbol.TS_7, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
-        table.put(new Key(Symbol.TS_8, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
-        table.put(new Key(Symbol.TS_9, Symbol.NTS_EXP), REPLACE_EXP_BY_INT_AND_OPER);
-        // /////////// Filling the second line of the table //////////////////
-        table.put(new Key(Symbol.TS_PLUS, Symbol.NTS_OPER), REPLACE_OPER_BY_PLUS_AND_EXP);
-        table.put(new Key(Symbol.TS_MINUS, Symbol.NTS_OPER), REPLACE_OPER_BY_MINUS_AND_EXP);
-        table.put(new Key(Symbol.TS_EOF, Symbol.NTS_OPER), REPLACE_OPER_BY_EOF);
-        // /////////// Filling the third line of the table //////////////////
-        table.put(new Key(Symbol.TS_0, Symbol.NTS_INT), REPLACE_INT_BY_0);
-        table.put(new Key(Symbol.TS_1, Symbol.NTS_INT), REPLACE_INT_BY_1);
-        table.put(new Key(Symbol.TS_2, Symbol.NTS_INT), REPLACE_INT_BY_2);
-        table.put(new Key(Symbol.TS_3, Symbol.NTS_INT), REPLACE_INT_BY_3);
-        table.put(new Key(Symbol.TS_4, Symbol.NTS_INT), REPLACE_INT_BY_4);
-        table.put(new Key(Symbol.TS_5, Symbol.NTS_INT), REPLACE_INT_BY_5);
-        table.put(new Key(Symbol.TS_6, Symbol.NTS_INT), REPLACE_INT_BY_6);
-        table.put(new Key(Symbol.TS_7, Symbol.NTS_INT), REPLACE_INT_BY_7);
-        table.put(new Key(Symbol.TS_8, Symbol.NTS_INT), REPLACE_INT_BY_8);
-        table.put(new Key(Symbol.TS_9, Symbol.NTS_INT), REPLACE_INT_BY_9);
+        // /////////// First line of the table ///////////////////
+        table.put(new Key(NTS_EXP, TS_0), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(NTS_EXP, TS_1), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(NTS_EXP, TS_2), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(NTS_EXP, TS_3), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(NTS_EXP, TS_4), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(NTS_EXP, TS_5), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(NTS_EXP, TS_6), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(NTS_EXP, TS_7), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(NTS_EXP, TS_8), REPLACE_EXP_BY_INT_AND_OPER);
+        table.put(new Key(NTS_EXP, TS_9), REPLACE_EXP_BY_INT_AND_OPER);
+        
+        // /////////// Second line of the table //////////////////
+        table.put(new Key(NTS_OPER, TS_PLUS), REPLACE_OPER_BY_PLUS_AND_EXP);
+        table.put(new Key(NTS_OPER, TS_MINUS), REPLACE_OPER_BY_MINUS_AND_EXP);
+        table.put(new Key(NTS_OPER, TS_EOF), REPLACE_OPER_BY_EOF);
+        
+        // /////////// Third line...            //////////////////
+        table.put(new Key(NTS_INT, TS_0), REPLACE_INT_BY_0);
+        table.put(new Key(NTS_INT, TS_1), REPLACE_INT_BY_1);
+        table.put(new Key(NTS_INT, TS_2), REPLACE_INT_BY_2);
+        table.put(new Key(NTS_INT, TS_3), REPLACE_INT_BY_3);
+        table.put(new Key(NTS_INT, TS_4), REPLACE_INT_BY_4);
+        table.put(new Key(NTS_INT, TS_5), REPLACE_INT_BY_5);
+        table.put(new Key(NTS_INT, TS_6), REPLACE_INT_BY_6);
+        table.put(new Key(NTS_INT, TS_7), REPLACE_INT_BY_7);
+        table.put(new Key(NTS_INT, TS_8), REPLACE_INT_BY_8);
+        table.put(new Key(NTS_INT, TS_9), REPLACE_INT_BY_9);
     }
 
     static ParserTable newInstance() {
         return new ParserTable();
     }
 
-    Derivations actionToTake(Symbol nextToken, Symbol currentNonTerminal) {
-        final Derivations action = table.get(new Key(nextToken, currentNonTerminal));
+    Derivation actionToTake(Symbol nonterminal, Symbol lookahead) {
+        final Derivation action = table.get(new Key(nonterminal, lookahead));
 
         if (action == null) {
-            throw new IllegalStateException("unknown operation for: " + nextToken);
+            throw new IllegalStateException("unknown operation for: " + lookahead);
         }
 
         return action;
     }
 
-    final class Key {
+    static final class Key {
 
-        private final Symbol inputToken;
+        private final Symbol nonterminal;
+        
+        private final Symbol lookahead;
 
-        private final Symbol stackSymbol;
+        public Key(Symbol nonterminal, Symbol lookahead) {
+            this.nonterminal = nonterminal;
+            this.lookahead = lookahead;
 
-        public Key(Symbol inputToken, Symbol stackSymbol) {
-            this.inputToken = inputToken;
-            this.stackSymbol = stackSymbol;
         }
 
         @Override
@@ -102,18 +134,20 @@ final class ParserTable {
             if (other.getClass() != this.getClass()) {
                 return false;
             }
-            return new EqualsBuilder().append(inputToken, ((Key) other).inputToken)
-                    .append(stackSymbol, ((Key) other).stackSymbol).isEquals();
+            return new EqualsBuilder()
+                    .append(nonterminal, ((Key) other).nonterminal)
+                    .append(lookahead, ((Key) other).lookahead)
+                    .isEquals();
         }
 
         @Override
         public int hashCode() {
-            return new HashCodeBuilder().append(inputToken).append(stackSymbol).hashCode();
+            return new HashCodeBuilder().append(nonterminal).append(lookahead).hashCode();
         }
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this).append(inputToken).append(stackSymbol).toString();
+            return new ToStringBuilder(this).append(nonterminal).append(lookahead).toString();
         }
 
     }
