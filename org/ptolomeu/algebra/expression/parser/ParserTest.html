@@ -242,495 +242,33 @@ dl.index-result {
     </head>
     <body>
 
-        <h1>Grammar</h1>
+        <h1>Parser</h1>
 
-        <pre class="notes">This is the grammar for expressions that currently can be parsed:<p/><ul><li><code>Exp -> Int Oper</code></li><li><code>Oper -> + Exp</code></li><li><code>Oper -> - Exp</code></li><li><code>Oper -> epsilon</code></li><li><code>Int -> 0 </code></li><li><code>Int -> 1 </code></li><li><code>Int -> 2 </code></li><li><code>Int -> 3 </code></li><li><code>Int -> 4 </code></li><li><code>Int -> 5 </code></li><li><code>Int -> 6 </code></li><li><code>Int -> 7 </code></li><li><code>Int -> 8 </code></li><li><code>Int -> 9 </code></li></ul>Click <a href="http://rafaelfiume.wordpress.com/2011/02/16/grammars-and-parsers/">*here*</a> to see more about parsers and grammars.</pre>
-        
 
         <div class="contents">
             <h2>Contents</h2>
 
             <ul class="contents">
-                    <li class='test-passed'><a href="#deriveToken">Derive token</a></li>
-                                    <li class='test-passed'><a href="#invalidDerivation">Invalid derivation</a></li>
+                    <li class='test-passed'><a href="#addition">Addition</a></li>
+                                    <li class='test-passed'><a href="#subtraction">Subtraction</a></li>
+                                    <li class='test-passed'><a href="#digit">Digit</a></li>
                 
             </ul>
         </div>
 
             <div class="testmethod section">
-                <a id="deriveToken"></a>
-                <h2 class="section-header">Derive token</h2>
+                <a id="addition"></a>
+                <h2 class="section-header">Addition</h2>
                 <div class="section-body">
-                        <pre class="notes">This is how a current nonterminal symbol found in an expression will be derived based on the next terminal (lookahead).</pre>
-                    
 
-                        <h3>Scenarios</h3>
 
-                        <table class="scenarios">
-                            <thead>
-                            <tr>
-<th>Non terminal</th> <th>Lookahead</th> <th>Derivation</th> 
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                        <td class='test-passed'><a href="#deriveToken(EXP, 0, EXP -&gt; INT OPER)">
-EXP
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 0, EXP -&gt; INT OPER)">
-0
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 0, EXP -&gt; INT OPER)">
-EXP -&gt; INT OPER
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(EXP, 1, EXP -&gt; INT OPER)">
-EXP
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 1, EXP -&gt; INT OPER)">
-1
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 1, EXP -&gt; INT OPER)">
-EXP -&gt; INT OPER
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(EXP, 2, EXP -&gt; INT OPER)">
-EXP
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 2, EXP -&gt; INT OPER)">
-2
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 2, EXP -&gt; INT OPER)">
-EXP -&gt; INT OPER
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(EXP, 3, EXP -&gt; INT OPER)">
-EXP
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 3, EXP -&gt; INT OPER)">
-3
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 3, EXP -&gt; INT OPER)">
-EXP -&gt; INT OPER
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(EXP, 4, EXP -&gt; INT OPER)">
-EXP
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 4, EXP -&gt; INT OPER)">
-4
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 4, EXP -&gt; INT OPER)">
-EXP -&gt; INT OPER
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(EXP, 5, EXP -&gt; INT OPER)">
-EXP
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 5, EXP -&gt; INT OPER)">
-5
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 5, EXP -&gt; INT OPER)">
-EXP -&gt; INT OPER
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(EXP, 6, EXP -&gt; INT OPER)">
-EXP
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 6, EXP -&gt; INT OPER)">
-6
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 6, EXP -&gt; INT OPER)">
-EXP -&gt; INT OPER
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(EXP, 7, EXP -&gt; INT OPER)">
-EXP
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 7, EXP -&gt; INT OPER)">
-7
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 7, EXP -&gt; INT OPER)">
-EXP -&gt; INT OPER
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(EXP, 8, EXP -&gt; INT OPER)">
-EXP
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 8, EXP -&gt; INT OPER)">
-8
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 8, EXP -&gt; INT OPER)">
-EXP -&gt; INT OPER
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(EXP, 9, EXP -&gt; INT OPER)">
-EXP
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 9, EXP -&gt; INT OPER)">
-9
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 9, EXP -&gt; INT OPER)">
-EXP -&gt; INT OPER
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(OPER, +, OPER -&gt; + EXP)">
-OPER
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(OPER, +, OPER -&gt; + EXP)">
-+
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(OPER, +, OPER -&gt; + EXP)">
-OPER -&gt; + EXP
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(OPER, -, OPER -&gt; - EXP)">
-OPER
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(OPER, -, OPER -&gt; - EXP)">
--
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(OPER, -, OPER -&gt; - EXP)">
-OPER -&gt; - EXP
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(OPER, EOF, OPER -&gt; epsilon)">
-OPER
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(OPER, EOF, OPER -&gt; epsilon)">
-EOF
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(OPER, EOF, OPER -&gt; epsilon)">
-OPER -&gt; epsilon
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(INT, 0, INT -&gt; 0)">
-INT
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 0, INT -&gt; 0)">
-0
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 0, INT -&gt; 0)">
-INT -&gt; 0
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(INT, 1, INT -&gt; 1)">
-INT
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 1, INT -&gt; 1)">
-1
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 1, INT -&gt; 1)">
-INT -&gt; 1
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(INT, 2, INT -&gt; 2)">
-INT
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 2, INT -&gt; 2)">
-2
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 2, INT -&gt; 2)">
-INT -&gt; 2
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(INT, 3, INT -&gt; 3)">
-INT
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 3, INT -&gt; 3)">
-3
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 3, INT -&gt; 3)">
-INT -&gt; 3
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(INT, 4, INT -&gt; 4)">
-INT
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 4, INT -&gt; 4)">
-4
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 4, INT -&gt; 4)">
-INT -&gt; 4
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(INT, 5, INT -&gt; 5)">
-INT
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 5, INT -&gt; 5)">
-5
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 5, INT -&gt; 5)">
-INT -&gt; 5
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(INT, 6, INT -&gt; 6)">
-INT
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 6, INT -&gt; 6)">
-6
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 6, INT -&gt; 6)">
-INT -&gt; 6
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(INT, 7, INT -&gt; 7)">
-INT
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 7, INT -&gt; 7)">
-7
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 7, INT -&gt; 7)">
-INT -&gt; 7
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(INT, 8, INT -&gt; 8)">
-INT
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 8, INT -&gt; 8)">
-8
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 8, INT -&gt; 8)">
-INT -&gt; 8
-                                        </a></td> 
-                                </tr>
-                                                             <tr>
-                                        <td class='test-passed'><a href="#deriveToken(INT, 9, INT -&gt; 9)">
-INT
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 9, INT -&gt; 9)">
-9
-                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(INT, 9, INT -&gt; 9)">
-INT -&gt; 9
-                                        </a></td> 
-                                </tr>
-                             
-                            </tbody>
-                        </table>
-
-                        <div class="scenario" id="180753500_1382197642">
-                            <a id="deriveToken(EXP, 0, EXP -&gt; INT OPER)"></a>
+                        <div class="scenario" id="1305590605_73393189">
+                            <a id=""></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
-Assert that derivation for non terminal EXP and lookahead 0 is &quot;EXP -&gt; INT OPER&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_2039648656">
-                            <a id="deriveToken(EXP, 1, EXP -&gt; INT OPER)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal EXP and lookahead 1 is &quot;EXP -&gt; INT OPER&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_93504331">
-                            <a id="deriveToken(EXP, 2, EXP -&gt; INT OPER)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal EXP and lookahead 2 is &quot;EXP -&gt; INT OPER&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_1716745160">
-                            <a id="deriveToken(EXP, 3, EXP -&gt; INT OPER)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal EXP and lookahead 3 is &quot;EXP -&gt; INT OPER&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_1893106675">
-                            <a id="deriveToken(EXP, 4, EXP -&gt; INT OPER)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal EXP and lookahead 4 is &quot;EXP -&gt; INT OPER&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_326172773">
-                            <a id="deriveToken(EXP, 5, EXP -&gt; INT OPER)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal EXP and lookahead 5 is &quot;EXP -&gt; INT OPER&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_1607528667">
-                            <a id="deriveToken(EXP, 6, EXP -&gt; INT OPER)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal EXP and lookahead 6 is &quot;EXP -&gt; INT OPER&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_242543362">
-                            <a id="deriveToken(EXP, 7, EXP -&gt; INT OPER)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal EXP and lookahead 7 is &quot;EXP -&gt; INT OPER&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_502323128">
-                            <a id="deriveToken(EXP, 8, EXP -&gt; INT OPER)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal EXP and lookahead 8 is &quot;EXP -&gt; INT OPER&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_786595939">
-                            <a id="deriveToken(EXP, 9, EXP -&gt; INT OPER)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal EXP and lookahead 9 is &quot;EXP -&gt; INT OPER&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_408615841">
-                            <a id="deriveToken(OPER, +, OPER -&gt; + EXP)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal OPER and lookahead &quot;+&quot; is &quot;OPER -&gt; + EXP&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_2101220228">
-                            <a id="deriveToken(OPER, -, OPER -&gt; - EXP)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal OPER and lookahead &quot;-&quot; is &quot;OPER -&gt; - EXP&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_1987280728">
-                            <a id="deriveToken(OPER, EOF, OPER -&gt; epsilon)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal OPER and lookahead EOF is &quot;OPER -&gt; epsilon&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_414033705">
-                            <a id="deriveToken(INT, 0, INT -&gt; 0)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal INT and lookahead 0 is &quot;INT -&gt; 0&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_817463655">
-                            <a id="deriveToken(INT, 1, INT -&gt; 1)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal INT and lookahead 1 is &quot;INT -&gt; 1&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_341889259">
-                            <a id="deriveToken(INT, 2, INT -&gt; 2)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal INT and lookahead 2 is &quot;INT -&gt; 2&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_210386033">
-                            <a id="deriveToken(INT, 3, INT -&gt; 3)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal INT and lookahead 3 is &quot;INT -&gt; 3&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_1199973669">
-                            <a id="deriveToken(INT, 4, INT -&gt; 4)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal INT and lookahead 4 is &quot;INT -&gt; 4&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_938525906">
-                            <a id="deriveToken(INT, 5, INT -&gt; 5)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal INT and lookahead 5 is &quot;INT -&gt; 5&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_537514927">
-                            <a id="deriveToken(INT, 6, INT -&gt; 6)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal INT and lookahead 6 is &quot;INT -&gt; 6&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_1697158807">
-                            <a id="deriveToken(INT, 7, INT -&gt; 7)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal INT and lookahead 7 is &quot;INT -&gt; 7&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_1270269795">
-                            <a id="deriveToken(INT, 8, INT -&gt; 8)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal INT and lookahead 8 is &quot;INT -&gt; 8&quot;</pre>
-                            <h3 class="logKey">Test results:</h3>
-                                    <pre class='highlight results test-passed'>
-Test passed</pre>
-
-
-                    </div>
-                                            <div class="scenario" id="180753500_1289509738">
-                            <a id="deriveToken(INT, 9, INT -&gt; 9)"></a>
-                            <h2>Specification</h2>
-                            <pre class="highlight specification">
-Assert that derivation for non terminal INT and lookahead 9 is &quot;INT -&gt; 9&quot;</pre>
+Assert that parser parse &quot;2 + 9 + 0 + 7 + 3 + 5&quot; is 26
+Assert that parser parse &quot;0 + 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9&quot; is 45
+Assert that parser parse &quot;1 + 9 + 4&quot; is 14</pre>
                             <h3 class="logKey">Test results:</h3>
                                     <pre class='highlight results test-passed'>
 Test passed</pre>
@@ -741,22 +279,38 @@ Test passed</pre>
                 </div>
             </div>
                     <div class="testmethod section">
-                <a id="invalidDerivation"></a>
-                <h2 class="section-header">Invalid derivation</h2>
+                <a id="subtraction"></a>
+                <h2 class="section-header">Subtraction</h2>
                 <div class="section-body">
 
 
-                        <div class="scenario" id="385201042_1558200836">
+                        <div class="scenario" id="863714145_1601664942">
                             <a id=""></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
-ADD
-Try
-Parser table action to take NTS_ EXP TS_0
-Fail
-Catch illegal state exception e
-Assert equals &quot;unknown operation for: &quot; TS_0 e get message
-</pre>
+Assert that parser parse &quot;1 - 1 - 0 + 7 - 5&quot; is 2
+Assert that parser parse &quot;1 + 1 - 7 + 2&quot; is 3
+Assert that parser parse &quot;1 - 9 - 4&quot; is 12</pre>
+                            <h3 class="logKey">Test results:</h3>
+                                    <pre class='highlight results test-passed'>
+Test passed</pre>
+
+
+                    </div>
+                    
+                </div>
+            </div>
+                    <div class="testmethod section">
+                <a id="digit"></a>
+                <h2 class="section-header">Digit</h2>
+                <div class="section-body">
+
+
+                        <div class="scenario" id="475165049_1754778997">
+                            <a id=""></a>
+                            <h2>Specification</h2>
+                            <pre class="highlight specification">
+Assert that parser parse &quot;2&quot; is 2</pre>
                             <h3 class="logKey">Test results:</h3>
                                     <pre class='highlight results test-passed'>
 Test passed</pre>
