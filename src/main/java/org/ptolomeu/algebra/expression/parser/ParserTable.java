@@ -38,30 +38,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-/**
- * It decides the next action to take based on the current nonterminal and the next terminal (lookahead) being parsed.</p>
- * Click <a href="http://rafaelfiume.wordpress.com/2011/02/16/grammars-and-parsers/">here</a> for an explanation about
- * the parser table.
- *
- * <p/>
- * 
- * <ol>
- * <li><code>Exp -> Int Oper</code></li>
- * <li><code>Oper -> + Exp</code></li>
- * <li><code>Oper -> - Exp</code></li>
- * <li><code>Oper -> epsilon</code></li>
- * <li><code>Int -> 0 </code></li>
- * <li><code>Int -> 1 </code></li>
- * <li><code>Int -> 2 </code></li>
- * <li><code>Int -> 3 </code></li>
- * <li><code>Int -> 4 </code></li>
- * <li><code>Int -> 5 </code></li>
- * <li><code>Int -> 6 </code></li>
- * <li><code>Int -> 7 </code></li>
- * <li><code>Int -> 8 </code></li>
- * <li><code>Int -> 9 </code></li>
- * </ol>
- */
 final class ParserTable {
 
     private final Map<Key, Derivation> table = new HashMap<>();

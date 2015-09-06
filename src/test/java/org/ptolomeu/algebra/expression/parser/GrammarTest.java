@@ -1,25 +1,63 @@
 package org.ptolomeu.algebra.expression.parser;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_EXP_BY_INT_AND_OPER;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_0;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_1;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_2;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_3;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_4;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_5;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_6;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_7;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_8;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_9;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_OPER_BY_EOF;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_OPER_BY_MINUS_AND_EXP;
+import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_OPER_BY_PLUS_AND_EXP;
+import static org.ptolomeu.algebra.expression.parser.Symbol.NTS_EXP;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_0;
+
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.googlecode.yatspec.junit.Notes;
 import com.googlecode.yatspec.junit.Row;
 import com.googlecode.yatspec.junit.SpecRunner;
 import com.googlecode.yatspec.junit.Table;
 
-import static org.junit.Assert.*;
-import static org.ptolomeu.algebra.expression.parser.Derivation.*;
-import static org.ptolomeu.algebra.expression.parser.Symbol.*;
-
+@Notes("This is the grammar for expressions that currently can be parsed:<p/>" 
+        + "<ul>" 
+        + "<li><code>Exp -> Int Oper</code></li>"
+        + "<li><code>Oper -> + Exp</code></li>"
+        + "<li><code>Oper -> - Exp</code></li>"
+        + "<li><code>Oper -> epsilon</code></li>"
+        + "<li><code>Int -> 0 </code></li>"
+        + "<li><code>Int -> 1 </code></li>"
+        + "<li><code>Int -> 2 </code></li>"
+        + "<li><code>Int -> 3 </code></li>"
+        + "<li><code>Int -> 4 </code></li>"
+        + "<li><code>Int -> 5 </code></li>"
+        + "<li><code>Int -> 6 </code></li>"
+        + "<li><code>Int -> 7 </code></li>"
+        + "<li><code>Int -> 8 </code></li>"
+        + "<li><code>Int -> 9 </code></li>"
+        + "</ul>"
+        + ""
+        + "Click <a href=\"http://rafaelfiume.wordpress.com/2011/02/16/grammars-and-parsers/\">*here*</a> to see more about parsers and grammars."
+        
+)
 @RunWith(SpecRunner.class)
-public class ParserTableTest {
+public class GrammarTest {
     
     private static final String EOF = "EOF";
 
     private ParserTable parserTable = ParserTable.newInstance();
 
+    @Notes("This is how a current nonterminal symbol found in an expression will be derived based on the next terminal (lookahead).")
     @Test
     @Table({
         @Row({"EXP", "0", "EXP -> INT OPER"}),
@@ -47,7 +85,7 @@ public class ParserTableTest {
         @Row({"INT", "9", "INT -> 9"})
     })
     public void deriveToken(String nonTerminal, String lookahead, String derivation) throws Exception {
-        assertThat(parserTable.actionToTake(forNonTerminal(nonTerminal), andNextTerminal(lookahead)), is(derivation));
+        assertThat(derivation(forNonTerminal(nonTerminal), andLookahead(lookahead)), is(derivation));
     }
     
     @Test
@@ -61,11 +99,15 @@ public class ParserTableTest {
         }
     }
     
+    private Derivation derivation(Symbol forNonTerminal, Symbol andLookahead) {
+        return parserTable.actionToTake(forNonTerminal, andLookahead);
+    }
+    
     private Symbol forNonTerminal(String currentNonTerminal) {
         return Symbol.valueOf("NTS_" + currentNonTerminal);
     }
 
-    private Symbol andNextTerminal(String token) {
+    private Symbol andLookahead(String token) {
         if (EOF.equals(token)) return Symbol.TS_EOF;
         
         return Symbol.lexer(token.charAt(0));

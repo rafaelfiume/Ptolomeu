@@ -6,7 +6,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   #copy data we're interested in to other place
   cp -R /tmp $HOME/spec
 
-  #go to home and setup gitSSsS
+  #go to home and setup git
   cd $HOME
   git config --global user.email "travis@travis-ci.org"
   git config --global user.name "Travis"
@@ -16,7 +16,9 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 
   #go into directory and copy data we're interested in to that directory
   cd gh-pages
+  cp -Rf $HOME/spec/org/ptolomeu/algebra/expression/parser/GrammarTest.html index.html
   cp -Rf $HOME/spec/* .
+  
 
   #add, commit and push files
   git add -f .
