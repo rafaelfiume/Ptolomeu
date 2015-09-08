@@ -1,9 +1,17 @@
 package org.ptolomeu.algebra.expression.parser;
 
-enum Symbol {
+enum Symbol implements LexicalElement {
 
-    TS_PLUS("+"),
-    TS_MINUS("-"),
+    TS_PLUS("+") {
+        @Override
+        public boolean isOperation() { return true; }
+    },
+    
+    TS_MINUS("-") {
+        @Override
+        public boolean isOperation() { return true; }
+    },
+    
     TS_0("0"),
     TS_1("1"),
     TS_2("2"),
@@ -36,8 +44,12 @@ enum Symbol {
 
         throw new IllegalStateException("Cannot parse '" + character + "'");
     }
+    
+    @Override
+    public boolean isOperation() { return false; }
 
     String symbol() {
         return symbol;
     }
+
 }

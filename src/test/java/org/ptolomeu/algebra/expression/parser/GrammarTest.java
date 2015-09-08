@@ -2,20 +2,20 @@ package org.ptolomeu.algebra.expression.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_EXP_BY_INT_AND_OPER;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_0;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_1;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_2;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_3;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_4;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_5;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_6;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_7;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_8;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_INT_BY_9;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_OPER_BY_EOF;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_OPER_BY_MINUS_AND_EXP;
-import static org.ptolomeu.algebra.expression.parser.Derivation.REPLACE_OPER_BY_PLUS_AND_EXP;
+import static org.ptolomeu.algebra.expression.parser.Derivation.EXP_BY_INT_AND_OPER;
+import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_0;
+import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_1;
+import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_2;
+import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_3;
+import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_4;
+import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_5;
+import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_6;
+import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_7;
+import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_8;
+import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_9;
+import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_EOF;
+import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_MINUS_AND_EXP;
+import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_PLUS_AND_EXP;
 import static org.ptolomeu.algebra.expression.parser.Symbol.NTS_EXP;
 import static org.ptolomeu.algebra.expression.parser.Symbol.TS_0;
 
@@ -173,20 +173,20 @@ public class GrammarTest {
     
     private Matcher<Derivation> is(String derivation) {
         switch(derivation) {
-            case "EXP -> INT OPER": return Matchers.is(REPLACE_EXP_BY_INT_AND_OPER);
-            case "OPER -> + EXP": return Matchers.is(REPLACE_OPER_BY_PLUS_AND_EXP);
-            case "OPER -> - EXP": return Matchers.is(REPLACE_OPER_BY_MINUS_AND_EXP);
-            case "OPER -> epsilon": return Matchers.is(REPLACE_OPER_BY_EOF);
-            case "INT -> 0": return Matchers.is(REPLACE_INT_BY_0);
-            case "INT -> 1": return Matchers.is(REPLACE_INT_BY_1);
-            case "INT -> 2": return Matchers.is(REPLACE_INT_BY_2);
-            case "INT -> 3": return Matchers.is(REPLACE_INT_BY_3);
-            case "INT -> 4": return Matchers.is(REPLACE_INT_BY_4);
-            case "INT -> 5": return Matchers.is(REPLACE_INT_BY_5);
-            case "INT -> 6": return Matchers.is(REPLACE_INT_BY_6);
-            case "INT -> 7": return Matchers.is(REPLACE_INT_BY_7);
-            case "INT -> 8": return Matchers.is(REPLACE_INT_BY_8);
-            case "INT -> 9": return Matchers.is(REPLACE_INT_BY_9);
+            case "EXP -> INT OPER": return Matchers.is(EXP_BY_INT_AND_OPER);
+            case "OPER -> + EXP": return Matchers.is(OPER_BY_PLUS_AND_EXP);
+            case "OPER -> - EXP": return Matchers.is(OPER_BY_MINUS_AND_EXP);
+            case "OPER -> epsilon": return Matchers.is(OPER_BY_EOF);
+            case "INT -> 0": return Matchers.is(INT_BY_0);
+            case "INT -> 1": return Matchers.is(INT_BY_1);
+            case "INT -> 2": return Matchers.is(INT_BY_2);
+            case "INT -> 3": return Matchers.is(INT_BY_3);
+            case "INT -> 4": return Matchers.is(INT_BY_4);
+            case "INT -> 5": return Matchers.is(INT_BY_5);
+            case "INT -> 6": return Matchers.is(INT_BY_6);
+            case "INT -> 7": return Matchers.is(INT_BY_7);
+            case "INT -> 8": return Matchers.is(INT_BY_8);
+            case "INT -> 9": return Matchers.is(INT_BY_9);
             
             default: return null;
         }

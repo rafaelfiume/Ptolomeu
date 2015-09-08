@@ -9,45 +9,30 @@ public class ExpressionTreeBuilder {
     
     private AbstractNode root;
 
-    public ExpressionTreeBuilder add(Symbol symbol) {
-        switch (symbol) {
-            case TS_0:
-            case TS_1:
-            case TS_2:
-            case TS_3:
-            case TS_4:
-            case TS_5:
-            case TS_6:
-            case TS_7:
-            case TS_8:
-            case TS_9:
-                this.root = addLeaf(symbol);
-                break;
-            
-            case TS_PLUS:
-            case TS_MINUS:
-                this.root = addSubTree(symbol);
-                break;
-                
-            default:
-                throw new UnsupportedOperationException(format("Symbol %s not supported", symbol));
+    public ExpressionTreeBuilder add(Symbol symbol) {      
+        if(symbol.isOperation()) {
+            this.root = addSubTree(symbol);
+        
+        } else {
+            this.root = addLeaf(symbol);
         }
+        
         return this;
     }
-    
+        
     public MathExp build() {
-        return root;
+        return this.root;
     }
 
     private AbstractNode addLeaf(Symbol symbol) {
         Constant constant = new Constant(parseInt(symbol.symbol()));
         
-        if (root == null) {    
+        if (this.root == null) {    
             return constant;
             
         } else {
-            root.addNode(constant);
-            return root;
+            this.root.addNode(constant);
+            return this.root;
         }        
     }
     
