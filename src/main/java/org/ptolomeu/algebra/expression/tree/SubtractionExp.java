@@ -9,11 +9,6 @@ public class SubtractionExp extends AbstractNode {
     public SubtractionExp(AbstractNode left, AbstractNode right) {
         super(left, right);
     }
-
-    @Override
-    public Integer evaluate(Context context) {
-        return left().evaluate(context) - right().evaluate(context);
-    }
     
     @Override
     public Integer evaluate() {

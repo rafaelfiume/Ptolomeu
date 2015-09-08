@@ -13,8 +13,10 @@ import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_6;
 import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_7;
 import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_8;
 import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_9;
+import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_DIV_AND_EXP;
 import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_EOF;
 import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_MINUS_AND_EXP;
+import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_MULT_AND_EXP;
 import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_PLUS_AND_EXP;
 import static org.ptolomeu.algebra.expression.parser.Symbol.NTS_EXP;
 import static org.ptolomeu.algebra.expression.parser.Symbol.TS_0;
@@ -128,6 +130,8 @@ public class GrammarTest {
         @Row({"EXP", "7", "EXP -> INT OPER"}),
         @Row({"EXP", "8", "EXP -> INT OPER"}),
         @Row({"EXP", "9", "EXP -> INT OPER"}), 
+        @Row({"OPER", "*", "OPER -> * EXP"}),
+        @Row({"OPER", "/", "OPER -> / EXP"}),
         @Row({"OPER", "+", "OPER -> + EXP"}),
         @Row({"OPER", "-", "OPER -> - EXP"}),
         @Row({"OPER", EOF, "OPER -> epsilon"}),
@@ -174,6 +178,8 @@ public class GrammarTest {
     private Matcher<Derivation> is(String derivation) {
         switch(derivation) {
             case "EXP -> INT OPER": return Matchers.is(EXP_BY_INT_AND_OPER);
+            case "OPER -> * EXP": return Matchers.is(OPER_BY_MULT_AND_EXP);
+            case "OPER -> / EXP": return Matchers.is(OPER_BY_DIV_AND_EXP);
             case "OPER -> + EXP": return Matchers.is(OPER_BY_PLUS_AND_EXP);
             case "OPER -> - EXP": return Matchers.is(OPER_BY_MINUS_AND_EXP);
             case "OPER -> epsilon": return Matchers.is(OPER_BY_EOF);

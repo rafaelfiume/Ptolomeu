@@ -9,11 +9,6 @@ public class Constant extends AbstractNode {
     }
 
     @Override
-    public Integer evaluate(Context context) {
-        return value;
-    }
-
-    @Override
     public Integer evaluate() {
         return value;
     }

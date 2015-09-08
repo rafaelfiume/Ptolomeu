@@ -1,15 +1,31 @@
 package org.ptolomeu.algebra.expression.parser;
 
+import org.ptolomeu.algebra.expression.tree.AbstractNode;
+import org.ptolomeu.algebra.expression.tree.AdditionExp;
+import org.ptolomeu.algebra.expression.tree.DivisionExp;
+import org.ptolomeu.algebra.expression.tree.MultiplicationExp;
+import org.ptolomeu.algebra.expression.tree.SubtractionExp;
+
 enum Symbol implements LexicalElement {
 
+    TS_MULT("*") {
+        @Override public boolean isOperator() { return true; }
+        @Override public AbstractNode operator() { return new MultiplicationExp(); }
+    },
+    
+    TS_DIV("/") {
+        @Override public boolean isOperator() { return true; }
+        @Override public AbstractNode operator() { return new DivisionExp(); }
+    },
+    
     TS_PLUS("+") {
-        @Override
-        public boolean isOperation() { return true; }
+        @Override public boolean isOperator() { return true; }       
+        @Override public AbstractNode operator() { return new AdditionExp(); }
     },
     
     TS_MINUS("-") {
-        @Override
-        public boolean isOperation() { return true; }
+        @Override public boolean isOperator() { return true; }
+        @Override public AbstractNode operator() { return new SubtractionExp(); }
     },
     
     TS_0("0"),
@@ -46,10 +62,15 @@ enum Symbol implements LexicalElement {
     }
     
     @Override
-    public boolean isOperation() { return false; }
+    public boolean isOperator() { return false; }
 
     String symbol() {
         return symbol;
+    }
+
+    @Override
+    public AbstractNode operator() {
+        throw new UnsupportedOperationException("not an operator");
     }
 
 }

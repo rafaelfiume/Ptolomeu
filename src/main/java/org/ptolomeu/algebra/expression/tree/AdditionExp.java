@@ -11,11 +11,6 @@ public class AdditionExp extends AbstractNode {
     }
 
     @Override
-    public Integer evaluate(Context context) {
-        return left().evaluate(context) + right().evaluate(context);
-    }
-
-    @Override
     public Integer evaluate() {
         return left().evaluate() + right().evaluate();
     }

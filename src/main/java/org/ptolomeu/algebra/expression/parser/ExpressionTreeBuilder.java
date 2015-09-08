@@ -1,16 +1,17 @@
 package org.ptolomeu.algebra.expression.parser;
 
 import static java.lang.Integer.parseInt;
-import static java.lang.String.format;
 
-import org.ptolomeu.algebra.expression.tree.*;
+import org.ptolomeu.algebra.expression.tree.AbstractNode;
+import org.ptolomeu.algebra.expression.tree.Constant;
+import org.ptolomeu.algebra.expression.tree.MathExp;
 
 public class ExpressionTreeBuilder {
     
     private AbstractNode root;
 
     public ExpressionTreeBuilder add(Symbol symbol) {      
-        if(symbol.isOperation()) {
+        if(symbol.isOperator()) {
             this.root = addSubTree(symbol);
         
         } else {
@@ -37,18 +38,9 @@ public class ExpressionTreeBuilder {
     }
     
     private AbstractNode addSubTree(Symbol symbol) {
-        AbstractNode exp = nodeFor(symbol);
-        exp.addNode(root);
-        return exp;
-    }
-
-    private AbstractNode nodeFor(Symbol symbol) {
-        switch(symbol) {
-            case TS_PLUS: return new AdditionExp();
-            case TS_MINUS: return new SubtractionExp();
-
-            default: throw new IllegalArgumentException(format("unknown expression for symbol %s", symbol));
-        }
+        AbstractNode tree = symbol.operator();
+        tree.addNode(root);
+        return tree;
     }
 
 }

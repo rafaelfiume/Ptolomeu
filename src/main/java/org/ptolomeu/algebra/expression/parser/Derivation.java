@@ -6,7 +6,6 @@ import static org.ptolomeu.algebra.expression.parser.Symbol.*;
 
 public enum Derivation implements Derivable {
 
-    // Replacing Add...
     EXP_BY_INT_AND_OPER {
         @Override
         public void derive(Stack<Symbol> parserStack) {
@@ -15,10 +14,25 @@ public enum Derivation implements Derivable {
             parserStack.push(NTS_INT);
         }
     },
-
-    /*
-     * Replacing Oper by Exp: Exp -> Int Oper
-     */
+ 
+    OPER_BY_MULT_AND_EXP {
+        @Override
+        public void derive(Stack<Symbol> stack) {
+            stack.pop();
+            stack.push(NTS_OPER);
+            stack.push(NTS_INT);
+            stack.push(TS_MULT);
+        }
+    },
+    OPER_BY_DIV_AND_EXP {
+        @Override
+        public void derive(Stack<Symbol> stack) {
+            stack.pop();
+            stack.push(NTS_OPER);
+            stack.push(NTS_INT);
+            stack.push(TS_DIV);
+        }
+    },
     OPER_BY_PLUS_AND_EXP {
         @Override
         public void derive(Stack<Symbol> stack) {

@@ -11,8 +11,10 @@ import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_6;
 import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_7;
 import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_8;
 import static org.ptolomeu.algebra.expression.parser.Derivation.INT_BY_9;
+import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_DIV_AND_EXP;
 import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_EOF;
 import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_MINUS_AND_EXP;
+import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_MULT_AND_EXP;
 import static org.ptolomeu.algebra.expression.parser.Derivation.OPER_BY_PLUS_AND_EXP;
 import static org.ptolomeu.algebra.expression.parser.Symbol.NTS_EXP;
 import static org.ptolomeu.algebra.expression.parser.Symbol.NTS_INT;
@@ -27,8 +29,10 @@ import static org.ptolomeu.algebra.expression.parser.Symbol.TS_6;
 import static org.ptolomeu.algebra.expression.parser.Symbol.TS_7;
 import static org.ptolomeu.algebra.expression.parser.Symbol.TS_8;
 import static org.ptolomeu.algebra.expression.parser.Symbol.TS_9;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_DIV;
 import static org.ptolomeu.algebra.expression.parser.Symbol.TS_EOF;
 import static org.ptolomeu.algebra.expression.parser.Symbol.TS_MINUS;
+import static org.ptolomeu.algebra.expression.parser.Symbol.TS_MULT;
 import static org.ptolomeu.algebra.expression.parser.Symbol.TS_PLUS;
 
 import java.util.HashMap;
@@ -56,6 +60,8 @@ final class ParserTable {
         table.put(new Key(NTS_EXP, TS_9), EXP_BY_INT_AND_OPER);
         
         // /////////// Second line of the table //////////////////
+        table.put(new Key(NTS_OPER, TS_MULT), OPER_BY_MULT_AND_EXP);
+        table.put(new Key(NTS_OPER, TS_DIV), OPER_BY_DIV_AND_EXP);
         table.put(new Key(NTS_OPER, TS_PLUS), OPER_BY_PLUS_AND_EXP);
         table.put(new Key(NTS_OPER, TS_MINUS), OPER_BY_MINUS_AND_EXP);
         table.put(new Key(NTS_OPER, TS_EOF), OPER_BY_EOF);
@@ -81,7 +87,7 @@ final class ParserTable {
         final Derivation action = table.get(new Key(nonterminal, lookahead));
 
         if (action == null) {
-            throw new IllegalStateException("unknown operation for: " + lookahead);
+            throw new IllegalStateException("unknown operation for: (" + nonterminal + ", " + lookahead + ")");
         }
 
         return action;

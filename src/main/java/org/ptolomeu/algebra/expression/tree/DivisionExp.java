@@ -1,18 +1,18 @@
 package org.ptolomeu.algebra.expression.tree;
 
-public class MultiplicationExp extends AbstractNode {
+public class DivisionExp extends AbstractNode {
 
-    public MultiplicationExp() {
+    public DivisionExp() {
     }
     
     // TODO RF Is this constructor going to be used apart from testing code?
-    public MultiplicationExp(AbstractNode left, AbstractNode right) {
+    public DivisionExp(AbstractNode left, AbstractNode right) {
         super(left, right);
     }
 
     @Override
     public Integer evaluate() {
-        return left().evaluate() * right().evaluate();
+        return left().evaluate() / right().evaluate();
     }
 
 }
