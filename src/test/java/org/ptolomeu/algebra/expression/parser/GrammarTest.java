@@ -75,10 +75,10 @@ import com.googlecode.yatspec.junit.Table;
         + "<td style=\"background-color: #d8d8d8;\">Exp</td>"
         + "<td style=\"text-align: center;\">N/A</td>"
         + "<td style=\"text-align: center;\">N/A</td>"
-        + "<td style=\"text-align: center;\">Exp -> Int Add'</td>"
-        + "<td style=\"text-align: center;\">Exp -> Int Add'</td>"
+        + "<td style=\"text-align: center;\">Exp -> Int Oper</td>"
+        + "<td style=\"text-align: center;\">Exp -> Int Oper</td>"
         + "<td style=\"text-align: center;\">. . .</td>"
-        + "<td style=\"text-align: center;\">Exp -> Int Add'</td>"
+        + "<td style=\"text-align: center;\">Exp -> Int Oper</td>"
         + "<td style=\"text-align: center;\">N/A</td>"
         + "</tr>"
 
