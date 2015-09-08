@@ -251,6 +251,9 @@ dl.index-result {
             <ul class="contents">
                     <li class='test-passed'><a href="#addition">Addition</a></li>
                                     <li class='test-passed'><a href="#subtraction">Subtraction</a></li>
+                                    <li class='test-passed'><a href="#multiplication">Multiplication</a></li>
+                                    <li class='test-passed'><a href="#division">Division</a></li>
+                                    <li class='test-not-run'><a href="#precedence">Precedence</a></li>
                                     <li class='test-passed'><a href="#digit">Digit</a></li>
                 
             </ul>
@@ -262,7 +265,7 @@ dl.index-result {
                 <div class="section-body">
 
 
-                        <div class="scenario" id="1767583704_1638024177">
+                        <div class="scenario" id="827352833_362449906">
                             <a id=""></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -284,7 +287,7 @@ Test passed</pre>
                 <div class="section-body">
 
 
-                        <div class="scenario" id="1679471946_359940254">
+                        <div class="scenario" id="1431947250_2035682468">
                             <a id=""></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -301,12 +304,75 @@ Test passed</pre>
                 </div>
             </div>
                     <div class="testmethod section">
+                <a id="multiplication"></a>
+                <h2 class="section-header">Multiplication</h2>
+                <div class="section-body">
+
+
+                        <div class="scenario" id="5775672_434955189">
+                            <a id=""></a>
+                            <h2>Specification</h2>
+                            <pre class="highlight specification">
+Assert that parser parse &quot;1 * 9 * 4&quot; is 36
+Assert that parser parse &quot;1 * 9 + 4 - 4&quot; is 9</pre>
+                            <h3 class="logKey">Test results:</h3>
+                                    <pre class='highlight results test-passed'>
+Test passed</pre>
+
+
+                    </div>
+                    
+                </div>
+            </div>
+                    <div class="testmethod section">
+                <a id="division"></a>
+                <h2 class="section-header">Division</h2>
+                <div class="section-body">
+
+
+                        <div class="scenario" id="257527135_1079009240">
+                            <a id=""></a>
+                            <h2>Specification</h2>
+                            <pre class="highlight specification">
+Assert that parser parse &quot;9 / 3 / 3&quot; is 1
+Assert that parser parse &quot;8 / 2 + 4&quot; is 8</pre>
+                            <h3 class="logKey">Test results:</h3>
+                                    <pre class='highlight results test-passed'>
+Test passed</pre>
+
+
+                    </div>
+                    
+                </div>
+            </div>
+                    <div class="testmethod section">
+                <a id="precedence"></a>
+                <h2 class="section-header">Precedence</h2>
+                <div class="section-body">
+
+
+                        <div class="scenario" id="1556381412_1751571024">
+                            <a id=""></a>
+                            <h2>Specification</h2>
+                            <pre class="highlight specification">
+Assert that parser parse &quot;9 + 1 * 5&quot; is 14
+Assert that parser parse &quot;9 + 6 / 3&quot; is 11</pre>
+                            <h3 class="logKey">Test results:</h3>
+                                    <pre class='highlight results test-not-run'>
+Test not run</pre>
+
+
+                    </div>
+                    
+                </div>
+            </div>
+                    <div class="testmethod section">
                 <a id="digit"></a>
                 <h2 class="section-header">Digit</h2>
                 <div class="section-body">
 
 
-                        <div class="scenario" id="54415379_1878724878">
+                        <div class="scenario" id="1262042535_452904326">
                             <a id=""></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">

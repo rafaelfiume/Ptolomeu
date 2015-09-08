@@ -244,7 +244,7 @@ dl.index-result {
 
         <h1>Grammar</h1>
 
-        <pre class="notes">This is the current grammar for expressions that can be parsed:<p/><ul><li><code>Exp -> Int Oper</code></li><li><code>Oper -> + Exp</li><li><code>Oper -> - Exp</li><li><code>Oper -> epsilon</li><li><code>Int -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</code></li></ul></p><h3>First and Follow Functions</h3></p><strong>First:</strong><ul><li>First(Exp) -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</li><li>First(Oper) -> + | - | epsilon</li><li>First(Int) -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</li></ul><strong>Follow:</strong><ul><li>Follow(Exp) -> $</li><li>Follow(Oper) -> $</li><li>Follow(Int) -> + | - | $</li></ul><h3>Parser Table</h3><table><tr><td style="background-color: #d8d8d8; text-align: center;"></td><td style="background-color: #d8d8d8; text-align: center;"><strong>+</strong></td><td style="background-color: #d8d8d8; text-align: center;"><strong>-</strong></td><td style="background-color: #d8d8d8; text-align: center;"><strong>0</strong></td><td style="background-color: #d8d8d8; text-align: center;"><strong>1</strong></td><td style="background-color: #d8d8d8; text-align: center;"><strong>. . .</strong></td><td style="background-color: #d8d8d8; text-align: center;"><strong>9</strong></td><td style="background-color: #d8d8d8; text-align: center;"><strong>$</strong></td></tr><tr><td style="background-color: #d8d8d8;">Exp</td><td style="text-align: center;">N/A</td><td style="text-align: center;">N/A</td><td style="text-align: center;">Exp -> Int Add'</td><td style="text-align: center;">Exp -> Int Add'</td><td style="text-align: center;">. . .</td><td style="text-align: center;">Exp -> Int Add'</td><td style="text-align: center;">N/A</td></tr><tr><td style="background-color: #d8d8d8;">Oper</td><td style="text-align: center;">Oper -> + Int Oper</td><td style="text-align: center;">Oper -> - Int Oper</td><td style="text-align: center;">N/A</td><td style="text-align: center;">N/A</td><td style="text-align: center;">. . .</td><td style="text-align: center;">N/A</td><td style="text-align: center;">Oper -> epsilon</td></tr><tr><td style="background-color: #d8d8d8;">Int</td><td style="text-align: center;">N/A</td><td style="text-align: center;">N/A</td><td style="text-align: center;">Int -> 0</td><td style="text-align: center;">Int -> 2</td><td style="text-align: center;">. . .</td><td style="text-align: center;">Int -> 9</td><td style="text-align: center;">N/A</td></tr></tr></table></p>Click <a href="http://rafaelfiume.wordpress.com/2011/02/16/grammars-and-parsers/">*here*</a> to see more about parsers and grammars.</pre>
+        <pre class="notes">This is the current grammar for expressions that can be parsed:<p/><ul><li><code>Exp -> Int Oper</code></li><li><code>Oper -> + Exp</li><li><code>Oper -> - Exp</li><li><code>Oper -> epsilon</li><li><code>Int -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</code></li></ul></p><h3>First and Follow Functions</h3></p><strong>First:</strong><ul><li>First(Exp) -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</li><li>First(Oper) -> + | - | epsilon</li><li>First(Int) -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</li></ul><strong>Follow:</strong><ul><li>Follow(Exp) -> $</li><li>Follow(Oper) -> $</li><li>Follow(Int) -> + | - | $</li></ul><h3>Parser Table</h3><table><tr><td style="background-color: #d8d8d8; text-align: center;"></td><td style="background-color: #d8d8d8; text-align: center;"><strong>+</strong></td><td style="background-color: #d8d8d8; text-align: center;"><strong>-</strong></td><td style="background-color: #d8d8d8; text-align: center;"><strong>0</strong></td><td style="background-color: #d8d8d8; text-align: center;"><strong>1</strong></td><td style="background-color: #d8d8d8; text-align: center;"><strong>. . .</strong></td><td style="background-color: #d8d8d8; text-align: center;"><strong>9</strong></td><td style="background-color: #d8d8d8; text-align: center;"><strong>$</strong></td></tr><tr><td style="background-color: #d8d8d8;">Exp</td><td style="text-align: center;">N/A</td><td style="text-align: center;">N/A</td><td style="text-align: center;">Exp -> Int Oper</td><td style="text-align: center;">Exp -> Int Oper</td><td style="text-align: center;">. . .</td><td style="text-align: center;">Exp -> Int Oper</td><td style="text-align: center;">N/A</td></tr><tr><td style="background-color: #d8d8d8;">Oper</td><td style="text-align: center;">Oper -> + Int Oper</td><td style="text-align: center;">Oper -> - Int Oper</td><td style="text-align: center;">N/A</td><td style="text-align: center;">N/A</td><td style="text-align: center;">. . .</td><td style="text-align: center;">N/A</td><td style="text-align: center;">Oper -> epsilon</td></tr><tr><td style="background-color: #d8d8d8;">Int</td><td style="text-align: center;">N/A</td><td style="text-align: center;">N/A</td><td style="text-align: center;">Int -> 0</td><td style="text-align: center;">Int -> 2</td><td style="text-align: center;">. . .</td><td style="text-align: center;">Int -> 9</td><td style="text-align: center;">N/A</td></tr></tr></table></p>Click <a href="http://rafaelfiume.wordpress.com/2011/02/16/grammars-and-parsers/">*here*</a> to see more about parsers and grammars.</pre>
         
 
         <div class="contents">
@@ -361,6 +361,24 @@ EXP
 9
                                         </a></td>                                         <td class='test-passed'><a href="#deriveToken(EXP, 9, EXP -&gt; INT OPER)">
 EXP -&gt; INT OPER
+                                        </a></td> 
+                                </tr>
+                                                             <tr>
+                                        <td class='test-passed'><a href="#deriveToken(OPER, *, OPER -&gt; * EXP)">
+OPER
+                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(OPER, *, OPER -&gt; * EXP)">
+*
+                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(OPER, *, OPER -&gt; * EXP)">
+OPER -&gt; * EXP
+                                        </a></td> 
+                                </tr>
+                                                             <tr>
+                                        <td class='test-passed'><a href="#deriveToken(OPER, /, OPER -&gt; / EXP)">
+OPER
+                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(OPER, /, OPER -&gt; / EXP)">
+/
+                                        </a></td>                                         <td class='test-passed'><a href="#deriveToken(OPER, /, OPER -&gt; / EXP)">
+OPER -&gt; / EXP
                                         </a></td> 
                                 </tr>
                                                              <tr>
@@ -484,7 +502,7 @@ INT -&gt; 9
                             </tbody>
                         </table>
 
-                        <div class="scenario" id="786595939_408615841">
+                        <div class="scenario" id="938525906_537514927">
                             <a id="deriveToken(EXP, 0, EXP -&gt; INT OPER)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -495,7 +513,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_537514927">
+                                            <div class="scenario" id="938525906_407793404">
                             <a id="deriveToken(EXP, 1, EXP -&gt; INT OPER)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -506,7 +524,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_1697158807">
+                                            <div class="scenario" id="938525906_1163423451">
                             <a id="deriveToken(EXP, 2, EXP -&gt; INT OPER)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -517,7 +535,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_1270269795">
+                                            <div class="scenario" id="938525906_819335022">
                             <a id="deriveToken(EXP, 3, EXP -&gt; INT OPER)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -528,7 +546,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_1289509738">
+                                            <div class="scenario" id="938525906_898570190">
                             <a id="deriveToken(EXP, 4, EXP -&gt; INT OPER)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -539,7 +557,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_385201042">
+                                            <div class="scenario" id="938525906_1164177626">
                             <a id="deriveToken(EXP, 5, EXP -&gt; INT OPER)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -550,7 +568,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_1558200836">
+                                            <div class="scenario" id="938525906_609852365">
                             <a id="deriveToken(EXP, 6, EXP -&gt; INT OPER)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -561,7 +579,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_118375487">
+                                            <div class="scenario" id="938525906_1996735071">
                             <a id="deriveToken(EXP, 7, EXP -&gt; INT OPER)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -572,7 +590,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_966952887">
+                                            <div class="scenario" id="938525906_399386628">
                             <a id="deriveToken(EXP, 8, EXP -&gt; INT OPER)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -583,7 +601,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_1568414960">
+                                            <div class="scenario" id="938525906_1604659921">
                             <a id="deriveToken(EXP, 9, EXP -&gt; INT OPER)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -594,7 +612,29 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_2135949442">
+                                            <div class="scenario" id="938525906_1419653221">
+                            <a id="deriveToken(OPER, *, OPER -&gt; * EXP)"></a>
+                            <h2>Specification</h2>
+                            <pre class="highlight specification">
+Assert that derivation for non terminal OPER and lookahead &quot;*&quot; is &quot;OPER -&gt; * EXP&quot;</pre>
+                            <h3 class="logKey">Test results:</h3>
+                                    <pre class='highlight results test-passed'>
+Test passed</pre>
+
+
+                    </div>
+                                            <div class="scenario" id="938525906_1568367177">
+                            <a id="deriveToken(OPER, /, OPER -&gt; / EXP)"></a>
+                            <h2>Specification</h2>
+                            <pre class="highlight specification">
+Assert that derivation for non terminal OPER and lookahead &quot;/&quot; is &quot;OPER -&gt; / EXP&quot;</pre>
+                            <h3 class="logKey">Test results:</h3>
+                                    <pre class='highlight results test-passed'>
+Test passed</pre>
+
+
+                    </div>
+                                            <div class="scenario" id="938525906_1332860561">
                             <a id="deriveToken(OPER, +, OPER -&gt; + EXP)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -605,7 +645,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_1565628442">
+                                            <div class="scenario" id="938525906_985526870">
                             <a id="deriveToken(OPER, -, OPER -&gt; - EXP)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -616,7 +656,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_400098003">
+                                            <div class="scenario" id="938525906_208734779">
                             <a id="deriveToken(OPER, EOF, OPER -&gt; epsilon)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -627,7 +667,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_675837664">
+                                            <div class="scenario" id="938525906_1201881473">
                             <a id="deriveToken(INT, 0, INT -&gt; 0)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -638,7 +678,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_762609865">
+                                            <div class="scenario" id="938525906_1700962593">
                             <a id="deriveToken(INT, 1, INT -&gt; 1)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -649,7 +689,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_2146017600">
+                                            <div class="scenario" id="938525906_775991687">
                             <a id="deriveToken(INT, 2, INT -&gt; 2)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -660,7 +700,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_1996735071">
+                                            <div class="scenario" id="938525906_424095178">
                             <a id="deriveToken(INT, 3, INT -&gt; 3)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -671,7 +711,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_399386628">
+                                            <div class="scenario" id="938525906_269432253">
                             <a id="deriveToken(INT, 4, INT -&gt; 4)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -682,7 +722,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_1604659921">
+                                            <div class="scenario" id="938525906_1452348295">
                             <a id="deriveToken(INT, 5, INT -&gt; 5)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -693,7 +733,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_1419653221">
+                                            <div class="scenario" id="938525906_1318662263">
                             <a id="deriveToken(INT, 6, INT -&gt; 6)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -704,7 +744,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_1568367177">
+                                            <div class="scenario" id="938525906_725417201">
                             <a id="deriveToken(INT, 7, INT -&gt; 7)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -715,7 +755,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_1332860561">
+                                            <div class="scenario" id="938525906_822233188">
                             <a id="deriveToken(INT, 8, INT -&gt; 8)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -726,7 +766,7 @@ Test passed</pre>
 
 
                     </div>
-                                            <div class="scenario" id="786595939_985526870">
+                                            <div class="scenario" id="938525906_215922271">
                             <a id="deriveToken(INT, 9, INT -&gt; 9)"></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
@@ -746,7 +786,7 @@ Test passed</pre>
                 <div class="section-body">
 
 
-                        <div class="scenario" id="208734779_1364635102">
+                        <div class="scenario" id="1905728914_2014746240">
                             <a id=""></a>
                             <h2>Specification</h2>
                             <pre class="highlight specification">
