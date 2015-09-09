@@ -31,30 +31,32 @@ import com.googlecode.yatspec.junit.Row;
 import com.googlecode.yatspec.junit.SpecRunner;
 import com.googlecode.yatspec.junit.Table;
 
-@Notes("This is the current grammar for expressions that can be parsed:<p/>" 
-        + "<ul>" 
-        + "<li><code>Exp -> Int Oper</code></li>"
-        + "<li><code>Oper -> + Exp</li>"
-        + "<li><code>Oper -> - Exp</li>"
-        + "<li><code>Oper -> epsilon</li>"
-        + "<li><code>Int -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</code></li>"
-        + "</ul>"
+@Notes("This is the current LL(1) grammar that the parse is suitable for:<p/>" 
+        + "<pre>" 
+        + "Exp  -> Int Oper<br>"
+        + "Oper -> * Exp |<br>"
+        + "        / Exp |<br>"
+        + "        + Exp |<br>"
+        + "        - Exp |<br>"
+        + "        epsilon<br>"
+        + "Int  -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9"
+        + "</pre>"
         + "</p>"
         + ""
         + "<h3>First and Follow Functions</h3>"
         + "</p>"
         + "<strong>First:</strong>"
         + "<ul>"
-        + "<li>First(Exp) -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</li>"
-        + "<li>First(Oper) -> + | - | epsilon</li>"
-        + "<li>First(Int) -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</li>"
+        + "<li>First(Exp)  -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</li>"
+        + "<li>First(Oper) -> * | / | + | - | epsilon</li>"
+        + "<li>First(Int)  -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</li>"
         + "</ul>"
         + ""
         + "<strong>Follow:</strong>"
         + "<ul>"
-        + "<li>Follow(Exp) -> $</li>"
+        + "<li>Follow(Exp)  -> $</li>"
         + "<li>Follow(Oper) -> $</li>"
-        + "<li>Follow(Int) -> + | - | $</li>"
+        + "<li>Follow(Int)  -> * | / | + | - | $</li>"
         + "</ul>"
         + ""
         + "<h3>Parser Table</h3>"
@@ -62,6 +64,8 @@ import com.googlecode.yatspec.junit.Table;
         + "<table>"
         + "<tr>"
         + "<td style=\"background-color: #d8d8d8; text-align: center;\"></td>"
+        + "<td style=\"background-color: #d8d8d8; text-align: center;\"><strong>*</strong></td>"
+        + "<td style=\"background-color: #d8d8d8; text-align: center;\"><strong>/</strong></td>"
         + "<td style=\"background-color: #d8d8d8; text-align: center;\"><strong>+</strong></td>"
         + "<td style=\"background-color: #d8d8d8; text-align: center;\"><strong>-</strong></td>"
         + "<td style=\"background-color: #d8d8d8; text-align: center;\"><strong>0</strong></td>"
@@ -75,6 +79,8 @@ import com.googlecode.yatspec.junit.Table;
         + "<td style=\"background-color: #d8d8d8;\">Exp</td>"
         + "<td style=\"text-align: center;\">N/A</td>"
         + "<td style=\"text-align: center;\">N/A</td>"
+        + "<td style=\"text-align: center;\">N/A</td>"
+        + "<td style=\"text-align: center;\">N/A</td>"
         + "<td style=\"text-align: center;\">Exp -> Int Oper</td>"
         + "<td style=\"text-align: center;\">Exp -> Int Oper</td>"
         + "<td style=\"text-align: center;\">. . .</td>"
@@ -84,6 +90,8 @@ import com.googlecode.yatspec.junit.Table;
 
         + "<tr>"
         + "<td style=\"background-color: #d8d8d8;\">Oper</td>"
+        + "<td style=\"text-align: center;\">Oper -> * Int Oper</td>"
+        + "<td style=\"text-align: center;\">Oper -> / Int Oper</td>"
         + "<td style=\"text-align: center;\">Oper -> + Int Oper</td>"
         + "<td style=\"text-align: center;\">Oper -> - Int Oper</td>"
         + "<td style=\"text-align: center;\">N/A</td>"
@@ -97,8 +105,10 @@ import com.googlecode.yatspec.junit.Table;
         + "<td style=\"background-color: #d8d8d8;\">Int</td>"
         + "<td style=\"text-align: center;\">N/A</td>"
         + "<td style=\"text-align: center;\">N/A</td>"
+        + "<td style=\"text-align: center;\">N/A</td>"
+        + "<td style=\"text-align: center;\">N/A</td>"
         + "<td style=\"text-align: center;\">Int -> 0</td>"
-        + "<td style=\"text-align: center;\">Int -> 2</td>"
+        + "<td style=\"text-align: center;\">Int -> 1</td>"
         + "<td style=\"text-align: center;\">. . .</td>"
         + "<td style=\"text-align: center;\">Int -> 9</td>"
         + "<td style=\"text-align: center;\">N/A</td>"
@@ -107,7 +117,7 @@ import com.googlecode.yatspec.junit.Table;
         + "</tr>"
         + "</table>"
         + "</p>"
-        + "Click <a href=\"http://rafaelfiume.wordpress.com/2011/02/16/grammars-and-parsers/\">*here*</a> to see more about parsers and grammars."
+        + "Click <a href=\"http://rafaelfiume.wordpress.com/2011/02/16/grammars-and-parsers/\">*here*</a> to read more about parsers and grammars."
         
 )
 @RunWith(SpecRunner.class)
@@ -130,10 +140,10 @@ public class GrammarTest {
         @Row({"EXP", "7", "EXP -> INT OPER"}),
         @Row({"EXP", "8", "EXP -> INT OPER"}),
         @Row({"EXP", "9", "EXP -> INT OPER"}), 
-        @Row({"OPER", "*", "OPER -> * EXP"}),
-        @Row({"OPER", "/", "OPER -> / EXP"}),
-        @Row({"OPER", "+", "OPER -> + EXP"}),
-        @Row({"OPER", "-", "OPER -> - EXP"}),
+        @Row({"OPER", "*", "OPER -> * INT OPER"}),
+        @Row({"OPER", "/", "OPER -> / INT OPER"}),
+        @Row({"OPER", "+", "OPER -> + INT OPER"}),
+        @Row({"OPER", "-", "OPER -> - INT OPER"}),
         @Row({"OPER", EOF, "OPER -> epsilon"}),
         @Row({"INT", "0", "INT -> 0"}),
         @Row({"INT", "1", "INT -> 1"}),
@@ -178,10 +188,10 @@ public class GrammarTest {
     private Matcher<Derivation> is(String derivation) {
         switch(derivation) {
             case "EXP -> INT OPER": return Matchers.is(EXP_BY_INT_AND_OPER);
-            case "OPER -> * EXP": return Matchers.is(OPER_BY_MULT_AND_EXP);
-            case "OPER -> / EXP": return Matchers.is(OPER_BY_DIV_AND_EXP);
-            case "OPER -> + EXP": return Matchers.is(OPER_BY_PLUS_AND_EXP);
-            case "OPER -> - EXP": return Matchers.is(OPER_BY_MINUS_AND_EXP);
+            case "OPER -> * INT OPER": return Matchers.is(OPER_BY_MULT_AND_EXP);
+            case "OPER -> / INT OPER": return Matchers.is(OPER_BY_DIV_AND_EXP);
+            case "OPER -> + INT OPER": return Matchers.is(OPER_BY_PLUS_AND_EXP);
+            case "OPER -> - INT OPER": return Matchers.is(OPER_BY_MINUS_AND_EXP);
             case "OPER -> epsilon": return Matchers.is(OPER_BY_EOF);
             case "INT -> 0": return Matchers.is(INT_BY_0);
             case "INT -> 1": return Matchers.is(INT_BY_1);
