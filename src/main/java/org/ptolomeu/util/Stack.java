@@ -2,8 +2,9 @@ package org.ptolomeu.util;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Iterator;
 
-public final class Stack<T> {
+public final class Stack<T> implements Iterable<T> {
 
     private final Deque<T> deque = new ArrayDeque<T>();
 
@@ -31,4 +32,9 @@ public final class Stack<T> {
         return deque.isEmpty();
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayDeque<T>(deque).iterator();
+    }
+    
 }

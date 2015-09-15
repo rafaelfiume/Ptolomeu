@@ -19,23 +19,27 @@ public class Parser {
         final Sentence sentence = Sentence.newInstance(input);
         final Scanner tokens = sentence.tokenizer();
 
-        return doParse(sentence, tokens, new ExpressionTreeBuilder());
+        return doParse(sentence, tokens, new ExpressionTreeBuilder(), new LogDerivationTableBuilder());
     }
 
-    private Integer doParse(Sentence sentence, Scanner tokens, ExpressionTreeBuilder treeBuilder) {
+    private Integer doParse(Sentence sentence, Scanner tokens, ExpressionTreeBuilder treeBuilder, LogDerivationTableBuilder tableBuilder) {
         if (parserStack.peek() == Symbol.TS_EOF) {
+            LOG.info(tableBuilder.build());
             return treeBuilder.build().evaluate(); // Bananas!!
         }
 
         if (parserStack.peek() == tokens.current()) {
             treeBuilder.add(parserStack.pop());
             tokens.nextToken();
-            return doParse(sentence, tokens, treeBuilder);
+            return doParse(sentence, tokens, treeBuilder, tableBuilder);
         }
 
         try {
-            parserTable.actionToTake(parserStack.peek(), tokens.current()).derive(parserStack);
-            return doParse(sentence, tokens, treeBuilder);
+            final Derivation action = parserTable.actionToTake(parserStack.peek(), tokens.current());
+            tableBuilder.addLine(tokens, parserStack, action);
+            
+            action.derive(parserStack);
+            return doParse(sentence, tokens, treeBuilder, tableBuilder);
 
         } catch (IllegalStateException e) {
             LOG.info("error while parsing the sencence " + sentence + ": " + e.getMessage());
