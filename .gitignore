@@ -6,4 +6,5 @@ ptolomeu.iml
 .classpath
 .project
 .settings/*
+nohup.out
 

@@ -1,5 +1,6 @@
 package org.ptolomeu.algebra.expression.parser;
 
+import static java.lang.System.lineSeparator;
 import static org.apache.commons.lang3.StringUtils.SPACE;
 import static org.apache.commons.lang3.StringUtils.repeat;
 import static org.apache.commons.lang3.StringUtils.rightPad;
@@ -35,7 +36,6 @@ class LogDerivationTableBuilder {
     }
     
     static class TableRenderer {
-        private static final String NEXT_LINE = "\n";
         
         private static final Object MIN_BLANK_SPACE_AT_BEGINNING = repeat(SPACE, 1);
         private static final Object MIN_BLANK_SPACE_AT_END = repeat(SPACE, 2);
@@ -49,12 +49,12 @@ class LogDerivationTableBuilder {
         String render() {
             final StringBuilder builder = new StringBuilder();
             
-            builder.append("Derivation of Sentence ").append(this.table.originalSentence()).append(NEXT_LINE).append(NEXT_LINE);
+            builder.append("Derivation of Sentence ").append(this.table.originalSentence()).append(lineSeparator()).append(lineSeparator());
             
             for (Line line : this.table) {
                 builder.append(rightPad(line.column(1), table.maxLengthOfColumn(1))).append(MIN_BLANK_SPACE_AT_END).append("|").append(MIN_BLANK_SPACE_AT_BEGINNING)
                        .append(rightPad(line.column(2), table.maxLengthOfColumn(2))).append(MIN_BLANK_SPACE_AT_END).append("|").append(MIN_BLANK_SPACE_AT_BEGINNING)
-                       .append(rightPad(line.column(3), table.maxLengthOfColumn(3))).append(MIN_BLANK_SPACE_AT_END).append(NEXT_LINE);
+                       .append(rightPad(line.column(3), table.maxLengthOfColumn(3))).append(MIN_BLANK_SPACE_AT_END).append(lineSeparator());
             }
             
             return builder.toString();
