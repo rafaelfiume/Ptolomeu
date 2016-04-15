@@ -41,7 +41,7 @@ public class ParserTest {
         assertThat(parser.parse("8 / 2 + 4"), is(8));
     }
     
-    @Ignore // Precedence tests failing. The grammar needs improvement.
+    @Ignore // Precedence tests failing. The grammar needs to support it.
     @Test
     public void precedence() throws Exception {
         assertThat(parser.parse("9 + 1 * 5"), is(14));

@@ -1,9 +1,11 @@
 language: java
+
 jdk:
-- oraclejdk8
-before_install:
-- chmod 755 ./update-gh-pages.sh
-after_success: ./update-gh-pages.sh
+  - oraclejdk8
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then chmod 755 ./update-gh-pages.sh; ./update-gh-pages.sh; fi
+
 env:
   global:
     secure: RDPCAcltfJ6SrIj6Q2cSGABrgD3JyQbR8tZiTIFMWi2wUbu5mlBGeYep1P/GFVKyBN6aTuo8FoglsvUB9LX4NFuJd55s5NoDvCNyEaBO29I72CQPF4chopLbX8tBsmFxNkDHz2NftsNIkTmubWETlNfqxcqdhdwD/5OGaHIZ780VGVlIkjgmnpSSnXCSyUEOYfx2gxHl6pWl31qtDgsjDiZGZ1XA7Am6zHRMtpjMMmWFlLJYs32fu45E+PySL4pcIViTm7RTcoiSnmDf+ez/KDy0zT9ILTGX7YSKvBt1MUoeJH9BOMar1KBTCtP7cpYsD9/1G9epsOzsVjtaIz0QpJ0X3YfrH15wcInfClITBfHiNlh6d9oNOTC38wkxwUy8vC++MI3gGdeKEfDZ9fGOS90oDDgvEYV44oaA7vJ33n0ip2ZBQF+2rGzHXn1y5SdhkwOcZPtfEo0DHOzOHZBPvatE0D9A/kNvuP5GsYxQaiXsrR7SRPf2UHOPZAv4HHpWOG9hu1StXu1gMLlMhNkO/AqR1g9CZw7n03rBboOhbA5IwAVfjHGhZYQzK7YtRlZXFg/txkKdG4zlDWz5tu6PNBDU553Sgq1FoBzU7acXDGjsY5A/tksO3ed8lThhhDKyrDVfC9/0m/YE4+TxHnCGfqgnn0PovNMRnqJ76+mnC5U=
